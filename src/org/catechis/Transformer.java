@@ -1,0 +1,705 @@
+package org.catechis;
+/*
+ Copyright 2006 Timothy Curchod Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.text.ParsePosition;
+import java.text.DateFormat;
+import java.util.Set;
+import java.util.Map;
+import java.util.Date;
+import java.util.List;
+import java.util.Vector;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Calendar;
+import java.util.Hashtable;
+import java.text.DecimalFormat;
+import java.beans.PropertyDescriptor;
+import org.apache.commons.beanutils.DynaBean;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.DynaProperty;
+import org.apache.commons.beanutils.BasicDynaBean;
+import org.apache.commons.beanutils.BasicDynaClass;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.beanutils.BasicDynaClass;
+import org.apache.struts.action.DynaActionForm;
+import org.catechis.dto.Test;
+import org.catechis.dto.Word;
+
+import org.jdom.Element;
+//import org.jdom.Content;
+//import org.jdom.Document;
+//import org.jdom.JDOMException;
+//import org.jdom.input.SAXBuilder;
+//import org.jdom.output.XMLOutputter;
+
+public class Transformer
+{
+	
+	private String possible_array[];
+	private static Vector log;
+	
+	//public Transformer()
+	//{}
+	
+	
+	public Transformer()
+	{
+		log = new Vector();
+	}
+	
+	/**
+	* We want to transform a long date in this format: "EEE MMM dd HH:mm:ss zzz yyyy"
+	* to a short date of this format: "MM/dd/yy"
+	*/
+	public static String simplifyDate(String long_date)
+	{
+		// Read (parse) the argument date into the used format.
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+		Date in_date = null;
+		ParsePosition pp = new ParsePosition(0);
+		in_date = sdf.parse(long_date, pp);
+		
+		// transform it into a shorter format.
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		String result = formatter.format(in_date);
+		return result;
+	}
+	
+	/**
+	*Takes a string with the date format we have been using since the beginning,
+	*and returns a long representing the instant.
+	*/
+	public static String getLongDateAsString(String str_date)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+		Date in_date = null;
+		ParsePosition pp = new ParsePosition(0);
+		Date date = sdf.parse(str_date, pp);
+		String result = Long.toString(date.getTime());
+		return result;
+	}
+	
+	/**
+	*Takes a string of encoded text and return its bytes in a string to avoid
+	*the new string from being encoded.
+	*/
+	public static String getByteString(String text)
+	{
+		byte[] text_bytes = text.getBytes();			// prepare the text
+		int b_size = text_bytes.length;
+		int i =0;
+		StringBuffer str_buf = new StringBuffer();
+		while (i<b_size)
+		{
+			//str_buf.append("-");
+			str_buf.append(Byte.toString(text_bytes[i]));
+			i++;
+		}
+		String str_bytes = new String(str_buf);
+		return str_bytes;
+	}
+	
+	/**
+	* Takes a string of encoded text and return its bytes in a string to avoid
+	*the new string from being encoded.
+	*/
+	public static String getByteStringWithEncoding(String text, String charsetName)
+	{
+		byte[] text_bytes = text.getBytes();			// prepare the text
+		int b_size = text_bytes.length;
+		int i =0;
+		StringBuffer str_buf = new StringBuffer();
+		while (i<b_size)
+		{
+			//str_buf.append("-");
+			str_buf.append(Byte.toString(text_bytes[i]));
+			i++;
+		}
+		String str_bytes = new String(text_bytes);
+		return str_bytes;
+	}
+	
+	/**
+	*Takes a string of encoded text and return its bytes in a string to avoid
+	*the new strin from being encoded.
+	*/
+	public static String getStringFromBytesString(String bytes_text)
+	{
+		String reg_exp = "-";
+		String strings[] = bytes_text.split(reg_exp);
+		int s_size = strings.length;
+		int i =0;
+		StringBuffer str_buf = new StringBuffer();
+		byte [] bytes;
+		bytes = new byte[s_size];
+		while (i<s_size)
+		{
+			if (i==0)
+			{
+				// for some reason the first part of the array is only a dash, 
+				// like this: --20-120-104-19-107-103
+				// followed by another dash and byte, so we stip of the first dash this way.
+				// Otherwise we get a nfe (see below)
+			} else
+			{
+				try
+				{
+					bytes[i] = Byte.parseByte("-"+strings[i]);
+				} catch (java.lang.NumberFormatException nfe)
+				{
+					// this happens if we dont ignore the girst byte
+					return new String("nfe");
+				}
+			}
+			i++;
+		}
+		String result = new String(bytes);
+		return result;
+	}
+	
+	/**
+	* We want to transform a Long value in string form to a short date of this format: "MM/dd/yy"
+	*/
+	public static String getDateFromMilliseconds(String str_milliseconds)
+	{
+		Date date = new Date(Long.parseLong(str_milliseconds));
+		SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yy");
+		String result = formatter.format(date);
+		return result;
+	}
+	
+	/**
+	* We want to transform a Long value in string form to a short date of this format: "MM/dd/yy"
+	*/
+	public static String getKoreanDateFromMilliseconds(String str_milliseconds)
+	{
+		Date date = new Date(Long.parseLong(str_milliseconds));
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String result = formatter.format(date);
+		return result;
+	}
+	
+	/**
+	* We want to transform a Long value in string form to a short date of this format: "MM/dd/yy"
+	*/
+	public static String getLongDateFromMilliseconds(String str_milliseconds)
+	{
+		Date date = new Date(Long.parseLong(str_milliseconds));
+		SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+		String result = formatter.format(date);
+		return result;
+	}
+	
+	public static String roundDouble(double long_number)
+	{
+		DecimalFormat formatter = new DecimalFormat("###.##");
+		return formatter.format(long_number);
+	}
+	
+	public static double averageNumber(double total, int count)
+	{
+		double average = (total / count);
+		return average;
+	}
+	
+	/**
+	* Create a hashmap out of a bean.
+	*<p>Can the exceptions be used to set a flag if any of the properties 
+	* have nested properties?
+	*/
+	public static HashMap dumpBean(Object obj)
+	{
+		HashMap properties = new HashMap();
+		try
+		{
+			properties = (HashMap)BeanUtils.describe(obj);
+		}
+		catch (java.lang.NoSuchMethodException nsme)
+		{
+			// if an accessor method for this property cannot be found
+			properties = null;
+		}
+		catch (java.lang.IllegalAccessException iae)
+		{
+			//  if the caller does not have access to the property accessor method
+			properties = null;
+		}
+		catch (java.lang.reflect.InvocationTargetException ite)
+		{
+			// if the property accessor method throws an exception
+			properties = null;
+		}
+		return properties;
+	}
+	
+	public static Vector createTable(Object obj)
+	{
+		Vector table = new Vector();
+		HashMap properties = dumpBean(obj);
+		if (properties == null)
+		{
+			return table;
+		}
+		Set keys = properties.keySet();
+		Iterator it = keys.iterator();
+		while (it.hasNext())
+		{
+			String key = (String)it.next();
+			String val = (String)properties.get(key);
+			if (val==null)
+			{
+				String not_array_line = (key+" = npe");
+				table.add(not_array_line);
+			}
+			else if (key.equals("class"))
+			{}
+			else
+			{
+				String not_array_line = new String(key+" = "+val);
+				table.add(not_array_line);
+			}
+		}
+		return table;
+	}
+	
+	/**
+	* If the property is null, then it may have children
+	*/
+	private static String[] evaluateProperty(Object obj, String key, String val)
+	{
+		String possible_array[] = new String[1];
+		try
+		{
+			possible_array = BeanUtils.getArrayProperty(obj, key);
+		}
+		catch (java.lang.IllegalAccessException iae)
+		{
+			// if the caller does not have access to the property accessor method
+		}
+		catch (java.lang.reflect.InvocationTargetException ite)
+		{
+			// if the property accessor method throws an exception
+		}
+		catch (java.lang.NoSuchMethodException nsme)
+		{
+			// if an accessor method for this property cannot be found
+		}
+		return possible_array;
+	}
+	
+	/** Wrapper method to hide the exceptions for the getIndexedProperty call*/
+	private static String getIndexedProp(Object obj, String key, int index)
+	{
+		String sub_line = new String();
+		try
+		{
+			sub_line = BeanUtils.getIndexedProperty(obj, key, index);
+		}
+		catch (java.lang.IllegalAccessException iae)
+		{
+			// if the caller does not have access to the property accessor method
+		}
+		catch (java.lang.reflect.InvocationTargetException ite)
+		{
+			// if the property accessor method throws an exception
+		}
+		catch (java.lang.NoSuchMethodException nsme)
+		{
+			// if an accessor method for this property cannot be found
+		}
+		return sub_line;
+	}
+	
+		/** Wrapper method to hide the exceptions for the getIndexedProperty call*/
+	private static Object getIndexedObject(Object obj, String key, int index)
+	{
+		Object sub_obj = new Object();
+		try
+		{
+			sub_obj = BeanUtils.getIndexedProperty(obj, key, index);
+		}
+		catch (java.lang.IllegalAccessException iae)
+		{
+			// if the caller does not have access to the property accessor method
+			sub_obj = null;
+		}
+		catch (java.lang.reflect.InvocationTargetException ite)
+		{
+			// if the property accessor method throws an exception
+			sub_obj = null;
+		}
+		catch (java.lang.NoSuchMethodException nsme)
+		{
+			// if an accessor method for this property cannot be found
+			sub_obj = null;
+		}
+		return sub_obj;
+	}
+	
+	private static String getPDsFDsName(Object obj, String key)
+	{
+		String feature_descriptor = new String();
+		try
+		{
+			PropertyDescriptor p_d = (PropertyDescriptor)PropertyUtils.getPropertyDescriptor(obj, key);
+			feature_descriptor = p_d.getShortDescription();
+		}
+		catch (java.lang.IllegalAccessException iae)
+		{}
+		catch (java.lang.reflect.InvocationTargetException ite)
+		{}
+		catch (java.lang.NoSuchMethodException nsme)
+		{}
+		return feature_descriptor;
+	}
+	
+	public static DynaBean getWordTestBean(int number_of_words_to_test)
+	{
+		DynaProperty[] properties = new DynaProperty[number_of_words_to_test];
+		{
+			int count = 0;
+			while (count<number_of_words_to_test)
+			{
+				properties[count] = new DynaProperty("feild"+count, String.class);
+				count++;
+			}
+		};
+		BasicDynaClass word_test_class =  new BasicDynaClass("word_test", BasicDynaBean.class, properties);
+		DynaBean word_test = new BasicDynaBean(word_test_class);
+		try
+		{
+			word_test = word_test_class.newInstance( );
+			int count = 0;
+			while (count<number_of_words_to_test)
+			{
+				word_test.set("feild"+count, "");
+				count++;
+			}
+		}
+		catch (java.lang.IllegalAccessException iae)
+		{
+			word_test = null;
+		}
+		catch (java.lang.InstantiationException ie)
+		{
+			word_test = null;
+		}
+		return word_test;
+	}
+	
+	public static Vector arrayIntoVector(Test [] tests)
+	{
+		Vector results = new Vector();
+		int length = tests.length;
+		int index = 0;
+		while (index < length)
+		{
+			Test test = (Test)tests[index];
+			Vector info = createTable(test);
+			StringBuffer buffer = new StringBuffer();
+			int size = info.size();
+			int i = 0;
+			while (i<size)
+			{
+				buffer.append(info.get(i)+" - ");
+				i++;
+			}
+			results.add(buffer.toString());
+			index++;
+		}
+		return results;
+	}
+	
+	public static Element createElement(Object obj)
+	{
+		Element e = null;
+		HashMap properties = dumpBean(obj);
+		if (properties == null)
+		{
+			return e;
+		}
+		Set keys = properties.keySet();
+		Iterator it = keys.iterator();
+		while (it.hasNext())
+		{
+			Element f = null;
+			String key = (String)it.next();
+			String val = (String)properties.get(key);
+			if (val==null)
+			{}
+			else if (key.equals("class"))
+			{}
+			else
+			{
+				f = new Element(key);
+				f.addContent(val);
+			}
+			try
+			{
+				e.addContent(f);
+			} catch (java.lang.NullPointerException npe)
+			{}
+		}
+		return e;
+	}
+	
+	/**
+	*<p>Create a Vector of dynamically created beans.
+	*<p>It only works for flat beans, with one layer of properties.
+	<p>BasicDynaClass is created like this:
+	BasicDynaClass(java.lang.String name, java.lang.Class dynaBeanClass, DynaProperty[] properties) 
+	getComponentType() 
+	*/
+	public static Vector loadElements(List list, String object_name, Class class_name)
+	{
+		Vector vector = new Vector();
+		//BasicDynaClass bd_class = new BasicDynaClass();
+		int size = list.size();
+		int i = 0;
+		// first construct the class
+		Element e = (Element)list.get(i);
+		List children = e.getChildren();
+		int kids = children.size();
+		DynaProperty [] dps = new DynaProperty [kids];
+		int j = 0;
+		while (i<kids)
+		{
+			Element kid = (Element)children.get(i);
+			String name = kid.getName();
+			try
+			{
+				dps [j] = new DynaProperty(name);
+			} catch (java.lang.ArrayIndexOutOfBoundsException aioob)
+			{
+				break;
+			}
+			j++;
+		}
+		BasicDynaClass bd_class = new BasicDynaClass(object_name, class_name, dps);
+		// then create the instances and populate them
+		while (i<size)
+		{
+			BasicDynaBean bd_bean = new BasicDynaBean(bd_class);
+			Element ee = (Element)list.get(i);
+			List childrens = ee.getChildren();
+			int kiddies = childrens.size();
+			int jj = 0;
+			while (jj<kids)
+			{
+				Element kidd = (Element)childrens.get(jj);
+				//Element child = kidds.getChild();
+				String name = kidd.getName();
+				String value = (String)kidd.getChildText(name);
+				bd_bean.set(name, value);
+				jj++;
+			}
+			vector.add(bd_bean);
+			i++;
+		}
+		return vector;
+	}
+	
+	public static Hashtable elementIntoHash(Element e)
+	{
+		Hashtable results = new Hashtable();
+		//Vector result = new Vector();
+		List children_list = e.getChildren();
+		Vector children = new Vector(children_list);
+		int size = children.size();
+		
+		try
+		{
+			//log.add("Transformer.elementIntoHash: size "+size);
+		} catch (java.lang.NullPointerException npe)
+		{
+			//log.add("Transformer.elementIntoHash: size npe");
+		}
+		
+		int i = 0;
+		while (i<size)
+		{
+			Element kid = (Element)children.get(i);
+			String name = kid.getName();
+			String value = (String)kid.getText();
+			//log.add("Transformer.elementIntoHash: name "+name+" "+value);
+			try
+			{
+				results.put(name, value);
+			} catch (java.lang.NullPointerException npe)
+			{}
+			i++;
+		}
+		return results;
+	}
+	
+	/**
+	*This method turns the tests a word has into a vector of data for the
+	*quaquaverse package to plot as a graph. For example:
+	*<p>1 0
+	*<p>2 1
+	*<p>3 0
+	*<p>4 1
+	*<p>5 2
+	*<p>Where the first number is the test (starting from 0 and counting up)
+	* and the second number indicates the words level as it goes up and down.
+	*<p>Tests have three elements, date, file/name and grade.
+	*<p>The file consists of what level the test was, as well as the type of test.
+	*<p>For instance: level 3 reading
+	*<p>We know then that the word was a level three, and if the test grade is fail,
+	* then the new level would be 2.
+	*<p>For this case, we would put the data (i 2) into the vector.
+	*<p>We are assuming that the previous entry would be (i 3) so that when
+	* quaquavers plots the graph, it would go from 3 to 2.
+	*/
+	public static Vector wordTestsIntoTypeData(Word word, String get_type, String max_level)
+	{
+		String level = "0";	// start level should come from entry_level
+		Test tests[] = word.getTests();
+		Vector data = new Vector();
+		int number_of_tests = tests.length;
+		int i = 0;
+		while (i < number_of_tests)
+		{
+			Test test = tests[i];
+			try
+			{
+				String grade = test.getGrade();
+				String file  = test.getName();
+				String test_type = Domartin.getTestType(file);
+				String test_level = Domartin.getTestLevel(file);
+				//data.add("Transformer.wordTestsIntoTypeData: grade "+grade+" "+test_level);
+				if (test_type.equals(get_type))
+				{
+					//data.add("added");
+					data.add(getLevel(test_level, grade, max_level));
+				}
+			} catch (java.lang.NullPointerException npe)
+			{
+				// try olde test type
+				try
+				{
+					data = tryToAddOldTestToVector(test, get_type, max_level, data);
+				} catch (java.lang.NullPointerException npe2)
+				{
+					// if we are here, that means that JDOMSolution had a problem
+					//data.add("didnt add "+i);
+				}
+			}
+			//data.add("next "+i);
+			i++;
+		}
+		return data;
+	}
+	
+	/**
+	 * Returns mm:ss from a long.
+	 * @param time
+	 * @return
+	 */
+	public static String getMinutesFromLong(long time)
+	{
+		String minutes = "";
+		Date date = new Date(time);
+		DateFormat formatter = new SimpleDateFormat("mm:ss");
+		minutes = formatter.format(date);
+		return minutes;
+	}
+	
+	private static Vector tryToAddOldTestToVector(Test test, String get_type, String max_level, Vector data)
+	{
+		
+		String level = "0";  // we need to get the level from the last data file entry...
+		String grade = test.getGrade();
+		String test_name = test.getName();
+		String test_type = Domartin.getOldTestType(test_name);
+		if (test_type.equals(get_type))
+		{
+			//data.add("Transformer.wordTestsIntoTypeData: grade "+grade);
+			data.add(getLevel(level, grade, max_level));
+		}
+		return data;
+	}
+	
+	/**
+	*If the file name is an old type, we have to increment the level,
+	* starting from 0, and going up or down depending on the order of the tests.
+	*/
+	private static String getLevel(String test_level, String grade, String max_level)
+	{
+		String current_level = "0";
+		try
+		{
+			if (grade.equals("pass"))
+			{
+				current_level = Domartin.incrementWordLevelLimited(test_level, max_level);
+			} else
+			{
+				current_level = Domartin.decrementWordLevel(test_level);
+			}
+		} catch (java.lang.NumberFormatException nfe)
+		{
+			current_level = "-1";
+		}
+		return current_level;
+	}
+	
+	/*
+	Element root = doc.getRootElement();
+		List option_list = root.getChildren(elements);
+		int size = option_list.size();
+		Hashtable options = new Hashtable();
+		String line = new String();
+		int i = 0;
+		while (i<size)
+		{
+			Element e = (Element)option_list.get(i);
+			String name = e.getChildText(names);
+			String value  = e.getChildText(values);
+			if (value==null) {value=new String("null");}
+			String enc_name = encoder.encodeThis(name);
+			String enc_value  = encoder.encodeThis(value);
+			options.put(enc_name, enc_value);
+			i++;
+		}
+		return options;
+	*/
+	/* this snippet comes from the createTable method when trying to read
+	the indexed test properties of a word object.  started after if (val==null)
+				boolean is_readable = PropertyUtils.isReadable(obj, key);
+				if (is_readable)
+				{
+					int index = 0;
+					boolean more = true;
+					while(index<10)
+					{
+						Object sub_obj = getIndexedObject(obj, key, index);
+						Vector sub_props = createTable(sub_obj);
+						if (sub_props == null)
+						{
+							break;
+						}
+						table.addAll(sub_props);
+						index++;
+					}
+				}
+	*/
+	
+    public Vector getLog()
+    {
+	    return log;
+    }
+    
+    private static Vector append(Vector add, Vector data)
+    {
+	    int i = 0;
+	    while (i<add.size())
+	    {
+		    data.add(add.get(i));
+		    i++;
+	    }
+	    return data;
+    }
+}

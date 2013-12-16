@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test_words><test_word><index>0</index><word_id>1111111111111111111</word_id><category>some file1.xml</category><text>READING text1</text><definition>def1</definition><testing_type>reading</testing_type><wntd_file_key></wntd_file_key></test_word><test_word><index>1</index><word_id>2222222222222222222</word_id><category>some file2.xml</category><text>WRITING text2</text><definition>def2</definition><testing_type>writing</testing_type><wntd_file_key></wntd_file_key></test_word></test_words>

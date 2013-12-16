@@ -1,0 +1,25 @@
+
+AllWordsTest: text, definition, category, test_type, level, answer
+
+ WordTestResult: text, definition, answer, grade, level, int id, original_text, original_definition, original_level, encoding
+
+store.recordWordTestScore(WordTestResult wtr, AllWordsTest awt, String max_level, String test_name, String user_name)
+
+jdom.recordWordScore(question, grade, test_name, date, test_type, max_level, org_level);
+
+
+- group options page
+- allow edit of options
+- choose group of files for daily test
+- choose levels for daily test
+- missed words list/category
+- exclude r/w word from test after
+it was in a recent w/r (opposite) test
+- import long list of words
+- test for daily limit roll over
+- show how many words are in daily list,
+how many are left, and position.
+- percentage grade from daily tests
+ie: number pass/number failed
+
+

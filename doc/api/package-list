@@ -1,0 +1,14 @@
+org.catechis
+org.catechis.admin
+org.catechis.constants
+org.catechis.dto
+org.catechis.file
+org.catechis.filter
+org.catechis.format
+org.catechis.gwangali
+org.catechis.indoct
+org.catechis.interfaces
+org.catechis.juksong
+org.catechis.legacy
+org.catechis.lists
+org.catechis.testing

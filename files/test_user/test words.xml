@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<vocab>
+	<word>
+		<text>바닷가</text>
+		<definition>beach</definition>
+		<writing-level>0</writing-level>
+		<reading-level>0</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 1 reading.test</file><grade>fail</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 1 writing.test</file><grade>fail</grade></test>
+	<id>-6224344794093969521</id></word>
+		<word>
+		<text>바닷&#xfffd;</text>
+		<definition>second level 0</definition>
+		<writing-level>0</writing-level>
+		<reading-level>0</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 1 reading.test</file><grade>fail</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 1 writing.test</file><grade>fail</grade></test>
+	<id>-6224344794093969521</id></word>
+	<word>
+		<text>바닷</text>
+		<definition>beach1</definition>
+		<writing-level>1</writing-level>
+		<reading-level>1</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>fail</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>fail</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+	<id>-6224344794093969521</id></word>
+	<word>
+		<text>바</text>
+		<definition>beach2</definition>
+		<writing-level>2</writing-level>
+		<reading-level>2</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 1 reading.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 1 writing.test</file><grade>pass</grade></test>
+	<id>-6224344794093969521</id></word>
+<word><text>two</text><definition>def2</definition><date-of-entry>1294843721061</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>3273344372997029107</id></word><word><text>one</text><definition>def</definition><date-of-entry>1294843721061</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>-1105918720788254005</id></word><word><text>three</text><definition>def3</definition><date-of-entry>1294843721061</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>6324715322916547846</id></word><word><text>two</text><definition>def2</definition><date-of-entry>1294902672896</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>-1209001661036692006</id></word><word><text>one</text><definition>def</definition><date-of-entry>1294902672896</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>1891322089847112272</id></word><word><text>three</text><definition>def3</definition><date-of-entry>1294902672896</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>4963051895002680610</id></word><word><text>two</text><definition>def2</definition><date-of-entry>1294902721483</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>-6847319806661766927</id></word><word><text>one</text><definition>def</definition><date-of-entry>1294902721483</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>5230082233527172750</id></word><word><text>three</text><definition>def3</definition><date-of-entry>1294902721483</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>-3418152460264005731</id></word></vocab>

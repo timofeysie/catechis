@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="lib" path="dist/catechis0-5.jar"/>
+	<classpathentry kind="lib" path="dist/catechis0-6.jar"/>
+	<classpathentry kind="lib" path="dist/catechis0-7.jar"/>
+	<classpathentry kind="lib" path="dist/catechis0-8.jar"/>
+	<classpathentry kind="lib" path="lib/beanviews.jar"/>
+	<classpathentry kind="lib" path="lib/commons-beanutils.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections.jar"/>
+	<classpathentry kind="lib" path="lib/commons-lang-2.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging.jar"/>
+	<classpathentry kind="lib" path="lib/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="lib/servlet.jar"/>
+	<classpathentry kind="lib" path="lib/xerces.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/home/timmy/projects/packages/junit-4.7.jar"/>
+	<classpathentry kind="lib" path="/home/timmy/struts-1.3.10/lib/struts-core-1.3.10.jar"/>
+	<classpathentry kind="output" path="build"/>
+</classpath>

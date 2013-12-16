@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<test_words>
+	<test_word>
+		<index>0</index>
+		<word_id>8899350741143368944</word_id>
+		<category>December.xml</category>
+		<text>열리다</text>
+		<definition>To be opened</definition>
+		<testing_type>reading</testing_type>
+	</test_word>
+	<test_word>
+		<index>1</index>
+		<word_id>6256422982837078941</word_id><category>JanuaryB-18.xml</category><text>순서대로</text>
+		<definition>In order</definition>
+		<testing_type>reading</testing_type></test_word><test_word><index>2</index><word_id>-5496263704523040241</word_id><category>JanuaryB-12.xml</category><text>우채부</text><definition>Post officer</definition><testing_type>reading</testing_type></test_word><test_word><index>3</index><word_id>236546302541442984</word_id><category>JanuaryB-10.xml</category><text>돕다</text><definition>To help</definition><testing_type>reading</testing_type></test_word><test_word><index>4</index><word_id>-6161676325854909513</word_id><category>JanuaryB-8.xml</category><text>도시락을 싸다</text><definition>To make a lunch box</definition><testing_type>reading</testing_type></test_word><test_word><index>5</index><word_id>4383166929907598790</word_id><category>JanuaryB-6.xml</category><text>모자라다</text><definition>To run short of</definition><testing_type>reading</testing_type></test_word><test_word><index>6</index><word_id>-7075448253851345742</word_id><category>JanuaryB-3.xml</category><text>교환</text><definition>exchange</definition><testing_type>reading</testing_type></test_word><test_word><index>7</index><word_id>-1906069451522910602</word_id><category>JanuaryB-1.xml</category><text>좌회전</text><definition>Left turn</definition><testing_type>reading</testing_type></test_word><test_word><index>8</index><word_id>-8567288729667480690</word_id><category>JanuaryB-9.xml</category><text>안부</text><definition>regards</definition><testing_type>reading</testing_type></test_word><test_word><index>9</index><word_id>-6271628601941802135</word_id><category>December.xml</category><text>놓치다</text><definition>To miss</definition><testing_type>reading</testing_type></test_word></test_words>

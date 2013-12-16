@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<options>
+	<option>
+		<name>format_tr_width</name>
+		<value>125</value>
+	</option>
+	<option>
+		<name>format_table_width</name>
+		<value>334</value>
+	</option>
+	<option>
+		<name>format_table_limit</name>
+		<value>18</value>
+	</option>
+	<option>
+		<name>format_tr_pixels</name>
+		<value>63</value>
+	</option>
+	<option>
+		<name>format_print_reading</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>format_print_writing</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>format_print_missed_reading</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>format_print_missed_writing</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>daily_list_print_new_words_reading</name>
+		<value>false</value>
+	</option>
+	<option>
+		<name>daily_list_print_new_words_writing</name>
+		<value>false</value>
+	</option>
+</options>
+	
+

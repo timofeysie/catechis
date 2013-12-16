@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<options>
+	<option>
+		<name>format_print_missed_reading</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>format_print_missed_writing</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>record_failed_tests</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>record_passed_tests</name>
+		<value>true</value>
+	</option>
+	<option>
+		<name>record_exclude_level</name>
+		<value>0</value>
+	</option>
+	<option>
+		<name>record_limit</name>
+		<value>17</value>
+	</option>
+	<option>
+		<name>word_lookup_for_pass</name>
+		<value>false</value>
+	</option>
+	<option>
+		<name>word_lookup_for_fail</name>
+		<value>false</value>
+	</option>
+</options>
+	
+

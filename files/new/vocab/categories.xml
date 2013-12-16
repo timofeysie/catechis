@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<categories>
+
+	<category>
+		<id>-8397159329048263230</id>
+		<name>Test1</name>
+		<total_words>0</total_words>
+		<creation_time>1337507302762</creation_time>
+		<category_type>non-exclusive</category_type>
+	</category>
+
+	<category>
+		<id>-9180443472956991174</id>
+		<name>Test2</name>
+		<total_words>2</total_words>
+		<creation_time>1337622643494</creation_time>
+		<category_type>exclusive</category_type>
+	</category>
+	
+	<category>
+		<id>-6922778011182930422</id>
+		<name>Test3</name>
+		<total_words>2</total_words>
+		<creation_time>1337678087279</creation_time>
+		<category_type>exclusive</category_type>
+	</category>
+	
+</categories>

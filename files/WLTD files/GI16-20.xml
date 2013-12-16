@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<vocab>
+<word><text>벗꽃</text><definition>cherry blossums</definition><reading-level>2</reading-level><writing-level>2</writing-level>
+<test><date>Thu Oct 19 20:27:35 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 14:13:27 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:04:12 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:56:28 KST 2006</date><file>level 1 writing.test</file><grade>fail</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+</word>
+<word><text>얼음 녹다</text><definition>to melt ice</definition><reading-level>2</reading-level><writing-level>2</writing-level>
+<test><date>Thu Oct 19 20:27:35 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 14:13:27 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:04:12 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:56:28 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+</word>
+<word><text>옷 차림</text><definition>attire</definition><reading-level>2</reading-level><writing-level>2</writing-level>
+<test><date>Wed Oct 25 14:13:27 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:04:12 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:56:28 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+
+</word>
+<word><text>새롭다</text><definition>to be fresh</definition><reading-level>2</reading-level><writing-level>2</writing-level>
+<test><date>Wed Oct 25 14:14:57 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:06:22 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:07:42 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:58:55 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+</word>
+<word><text>낙엽</text><definition>fallen leaves</definition><reading-level>2</reading-level><writing-level>1</writing-level>
+<test><date>Wed Oct 25 14:13:27 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:06:22 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:07:42 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:08:25 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Tue Oct 31 21:52:37 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+</word>
+<word><text>독서하다</text><definition>to read a novel</definition><reading-level>1</reading-level><writing-level>2</writing-level>
+<test><date>Wed Oct 25 14:13:27 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:06:22 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:58:55 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Dec 14 17:11:58 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test></word>
+<word><text>살이 찌는 계절</text><definition>weight gaining season</definition><reading-level>2</reading-level>
+<writing-level>1</writing-level>
+<test><date>Wed Oct 25 14:13:27 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:06:22 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:07:42 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:08:25 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Tue Oct 31 21:52:37 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+</word><word><text>음악회</text><definition>concert</definition><reading-level>2</reading-level><writing-level>2</writing-level>
+<test><date>Wed Oct 25 14:14:57 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:06:22 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:58:55 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:29:08 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+</word><word><text>과로하다</text><definition>to overwork oneself</definition><reading-level>0</reading-level>
+<writing-level>2</writing-level><test><date>Wed Oct 25 14:14:57 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 14:17:57 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:06:22 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:58:55 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+<test><date>Fri Nov 03 13:59:33 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Dec 14 17:11:58 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Dec 14 17:15:37 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+</word>
+<word><text>과속하다</text><definition>to speed</definition><reading-level>1</reading-level><writing-level>2</writing-level>
+<test><date>Wed Oct 25 14:14:57 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 17:06:22 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:58:55 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:26:58 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Dec 14 17:11:58 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+</word><word><text>각자</text><definition>separately</definition><reading-level>2</reading-level><writing-level>1</writing-level>
+<test><date>Wed Oct 25 14:14:57 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 14:17:57 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:07:42 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:08:25 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Tue Oct 31 21:54:44 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Wed Nov 01 20:42:14 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Fri Nov 03 13:59:33 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Sun Nov 12 15:29:08 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+</word>
+<word><text>따로~</text><definition>apart from something</definition><reading-level>0</reading-level>
+<writing-level>1</writing-level><test><date>Wed Oct 25 14:17:57 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:07:42 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Tue Oct 31 21:54:44 KST 2006</date><file>level 0 writing.test</file><grade>fail</grade></test>
+</word>
+<word><text>대청소</text><definition>clean up</definition><reading-level>2</reading-level><writing-level>1</writing-level>
+<test><date>Wed Oct 25 14:14:57 KST 2006</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Wed Oct 25 17:07:42 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Oct 25 19:58:55 KST 2006</date><file>level 1 writing.test</file><grade>fail</grade></test>
+<test><date>Tue Oct 31 21:54:44 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Nov 06 18:34:36 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+</word>
+</vocab>

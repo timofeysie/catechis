@@ -1,0 +1,220 @@
+<!--:mode=ant -->
+  <!-- ========================================================== -->
+  <!-- ugly things -->
+  <!-- ========================================================== -->
+  
+  <!-- ========================================================== -->
+  <!-- Load Environment Variables                                 -->
+  <!-- ========================================================== -->
+  <!-- #Load environment variables -->
+  <property environment="env"/>
+
+  <!-- this is here to deal with the fact that an IntelliJ IDEA build has no ant home -->
+  <property name="ant.home" value="${env.ANT_HOME}" />
+  
+  <!-- get Unix hostname, and set to Windows comparable name -->
+  <!-- #Trick to get host name x-platform -->
+  <property name="env.COMPUTERNAME" value="${env.HOSTNAME}"/>
+
+  <!-- ========================================================== -->
+  <!-- Load property files                                        -->
+  <!--   Note: the ordering is VERY important.                    -->
+  <!-- ========================================================== -->
+  <!-- #Allow even users property file to relocate -->
+  <property name="user.properties.file"
+            location="$/build.properties"/>
+
+  <!-- Load the application specific settings -->
+  <!-- #Project specific props -->
+  <property file="/build.properties"/>
+
+  <!-- Load user specific settings -->
+  <!-- #User specific properties (username/password, etc) -->
+  <property file="${user.properties.file}"/>
+
+  <!-- ========================================================== -->
+  <!-- Directory mappings                                         -->
+  <!-- ========================================================== -->
+  <!-- #Note use of 'location' -->
+  <property name="root.dir" location="${basedir}"/>
+  <property name="masterbuild.dir" location="${root.dir}/.."/>
+  <property file="${masterbuild.dir}/build.properties"/>
+
+  <property name="src.dir" location="${root.dir}/src"/>
+
+  <property name="build.dir" location="build"/>
+  <property name="build.classes.dir"
+    location="${build.dir}/classes"/>
+  <property name="dist.dir" location="dist"/>
+  <property name="dist.bin.dir" location="${dist.dir}/bin"/>
+  <property name="doc.dir" location="doc"/>
+  <property name="javadoc.dir" location="${doc.dir}/javadoc"/>
+  <property name="lib.dir" location="${masterbuild.dir}/lib"/>
+
+
+  <!-- ========================================================== -->
+  <!-- Compile settings                                           -->
+  <!-- ========================================================== -->
+  <!-- #Typical defaults for javac -->
+  <property name="build.debug" value="on"/>
+  <property name="build.optimize" value="off"/>
+
+  <!-- ========================================================== -->
+  <!-- Test settings                                              -->
+  <!-- ========================================================== -->
+  <property name="test.dir" location="${build.dir}/test"/>
+  <property name="test.classes.dir" location="${test.dir}/classes"/>
+  <property name="test.data.dir" location="${test.dir}/data"/>
+  <property name="test.reports.dir" location="${test.dir}/reports"/>
+  <property name="test.src.dir" location="${root.dir}/test"/>
+  <property name="test.last.failed.file"
+    location="${build.dir}/.lasttestsfailed"/>
+            
+  
+  <!-- ========================================================== -->
+  <!-- Library dependency settings                                -->
+  <!-- ========================================================== -->
+  <!-- #Library indirection -->
+  <property name="lib.properties.file"
+    location="${lib.dir}/lib.properties"/>
+
+  <!-- #lib.properties.file contains .version props -->
+  <property file="${lib.properties.file}"/>
+
+  <!-- library directory mappings -->
+  <!-- #directory mappings to each librarys root -->
+  <!-- #actual distribution directory structure underneath -->
+  <property name="checkstyle.dir"
+    location="${lib.dir}/checkstyle-${checkstyle.version}"/>
+  
+  <property name="hsqldb.dir"  location="${lib.dir}/hsqldb-${hsqldb.version}"/>
+  <property name="j2ee.dir"    location="${lib.dir}/j2sdkee${j2ee.version}"/>
+  <property name="jtidy.dir"   location="${lib.dir}/jtidy-${jtidy.version}"/>
+  <property name="junit.dir"   location="${ant.home}/lib"/>
+  <property name="log4j.dir"   location="${lib.dir}/jakarta-log4j-${log4j.version}"/>
+  <property name="lucene.dir"  location="${lib.dir}/lucene-${lucene.version}"/>
+  <property name="struts.dir"  location="${lib.dir}/jakarta-struts-${struts.version}"/>
+  <property name="torque.dir"  location="${lib.dir}/torque-${torque.version}"/>
+  <property name="xdoclet.dir" location="${lib.dir}/xdoclet-${xdoclet.version}"/>
+  <property name="jasper.dir" location="${lib.dir}/jasper"/>
+  <property name="httpunit.dir" location="${lib.dir}/httpunit-${httpunit.version}"/>
+  <property name="axis.dir" location="${lib.dir}/xml-axis-${axis.version}"/>
+  <property name="webtest.dir" location="${lib.dir}/webtest-${webtest.version}"/>
+  <property name="xercesxalan.dir" location="${lib.dir}/xercesxalan"/>
+
+  <!-- each library has its own unique directory structure -->
+  <!-- #each librarys own directory structure (note using 'value') -->
+  <property name="checkstyle.subdir" value=""/>
+  <property name="hsqldb.subdir"     value=""/>
+  <property name="j2ee.subdir"       value="lib"/>
+  <property name="jtidy.subdir"      value="build"/>
+  <property name="junit.subdir"      value=""/>
+  <property name="log4j.subdir"      value="dist/lib"/>
+  <property name="lucene.subdir"     value=""/>
+  <property name="struts.subdir"     value="lib"/>
+  <property name="torque.subdir"     value="lib"/>
+  <property name="xdoclet.subdir"    value="lib"/>
+  <property name="httpunit.subdir"    value="lib"/>
+  <property name="axis.subdir"    value="lib"/>
+  <property name="webtest.subdir" value="lib"/>
+  <property name="xercesxalan.subdir"    value="lib"/>
+  
+  <!-- JAR file mappings -->
+  <!-- #mappings directly to jar files -->
+  <property name="checkstyle.jar"
+    location="${checkstyle.dir}/${checkstyle.subdir}/checkstyle-all-${checkstyle.version}.jar"/>
+  
+  <property name="hsqldb.jar"
+    location="${hsqldb.dir}/${hsqldb.subdir}/hsqldb.jar"/>
+  <property name="j2ee.jar" 
+    location="${j2ee.dir}/${j2ee.subdir}/j2ee.jar"/>
+  
+  <property name="jtidy.jar"
+    location="${jtidy.dir}/${jtidy.subdir}/Tidy.jar"/>
+  <property name="junit.jar" 
+    location="${junit.dir}/${junit.subdir}/junit.jar"/>
+  <property name="log4j.dist.dir" 
+    location="${log4j.dir}/${log4j.subdir}"/>
+  <property name="log4j.jar" 
+    location="${log4j.dist.dir}/log4j.jar"/>
+  
+  <property name="lucene.dist.dir"
+    location="${lucene.dir}/${lucene.subdir}"/>
+    
+  <property name="lucene.jarname"
+    value="lucene-${lucene.version}.jar"/>
+
+  <property name="lucene.jar"
+    location="${lucene.dist.dir}/${lucene.jarname}"/>
+    
+  <property name="struts.dist.dir"
+    location="${struts.dir}/${struts.subdir}"/>
+  <property name="struts.jar"
+    location="${struts.dist.dir}/struts.jar"/>
+    
+  <property name="torque.dist.dir"
+    location="${torque.dir}/${torque.subdir}"/>
+    
+  <property name="torque.jar"
+    location="${torque.dist.dir}/torque-${torque.version}.jar"/>
+
+  <property name="xdoclet.jar"
+    location="${xdoclet.dir}/${xdoclet.subdir}/xdoclet.jar"/>
+
+  <property name="httpunit.jar"
+    location="${httpunit.dir}/${httpunit.subdir}/httpunit.jar"/>
+  <property name="jtidy.jar"
+    location="${httpunit.dir}/${httpunit.subdir}/jtidy.jar"/>
+
+  <property name="axis.dist.dir"
+    location="${axis.dir}/${axis.subdir}"/>
+    
+  <property name="webtest.dist.dir"
+    location="${webtest.dir}/${webtest.subdir}"/>
+
+  <property name="xercesxalan.dist.dir"
+    location="${xercesxalan.dir}/${xercesxalan.subdir}"/>
+    
+  <!-- ========================================================== -->
+  <!-- xml logger config -->
+  <!-- ========================================================== -->
+
+<!--   
+    <property name="log.dir" 
+        location="${env.CATALINA_HOME}/webapps/ROOT/log"/>
+ -->
+    <property name="log.dir" 
+        location="${masterbuild.dir}/log"/>
+ 
+ <!--   <property name="ant.XmlLogger.stylesheet.uri" 
+      location="${ant.home}/etc/log.xsl" />  -->   
+      
+    
+  <!-- ========================================================== -->
+  <!-- index info -->            
+  <!-- ========================================================== -->
+  <property name="index.dir"
+    location="${masterbuild.dir}/index/build/index"/>
+
+  <property name="docstoindex.dir" value="${ant.home}/docs"/>
+  <fileset dir="${docstoindex.dir}" id="indexed.files"/>
+    
+  <!-- ========================================================== -->
+  <!-- generated output -->
+  <!-- name the files we are creating-->
+  <!-- ========================================================== -->
+  <property name="antbook-ant.dist.dir"
+    location="${masterbuild.dir}/ant/dist/"/>
+
+  <property name="antbook-ant.jar"
+    location="${antbook-ant.dist.dir}/antbook-ant.jar"/>
+
+  <property name="antbook-common.dist.dir"
+    location="${masterbuild.dir}/common/dist/"/>
+
+  <property name="antbook-common.jar"
+    location="${antbook-common.dist.dir}/antbook-common.jar"/>
+
+  
+
+

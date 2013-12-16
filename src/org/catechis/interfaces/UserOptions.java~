@@ -1,0 +1,10 @@
+package org.catechis.interfaces;
+
+import java.util.Vector;
+import java.util.Hashtable;
+
+public interface UserOptions
+{
+	public Hashtable getUserOptions(String user_name);
+	public void addUsersOptions(String option, String initial_value, Vector users);
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<history>
+	<all_stats_history>
+		<date>Thu Oct 13 19:10:24 KST 2005</date>
+		<number_of_tests>182</number_of_tests>
+		<average_score>49.7</average_score>
+		<number_of_words>913</number_of_words>
+		<writing_average>1.2</writing_average>
+		<reading_average>0.81</reading_average>
+		<words_at_reading_level_0>317</words_at_reading_level_0>
+		<words_at_reading_level_1>474</words_at_reading_level_1>
+		<words_at_reading_level_2>99</words_at_reading_level_2>
+		<words_at_reading_level_3>22</words_at_reading_level_3>
+		<words_at_writing_level_0>201</words_at_writing_level_0>
+		<words_at_writing_level_1>485</words_at_writing_level_1>
+		<words_at_writing_level_2>137</words_at_writing_level_2>
+		<words_at_writing_level_3>57</words_at_writing_level_3>
+	</all_stats_history>
+</history>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<test_words>
+<test_word><index>0</index><word_id>-974372450394015960</word_id><category>random words 12.xml</category><text>경우에는</text><definition>in that case</definition><deck_card_name>R1</deck_card_name><deck_card_word_type>reading</deck_card_word_type><reading_deck_card_name>R1</reading_deck_card_name><writing_deck_card_name>W3</writing_deck_card_name></test_word>
+<test_word><index>1</index><word_id>-7747983981330287976</word_id><category>random words 12.xml</category><text>
+사람 약하다</text><definition>to be a weak person</definition><deck_card_name>R2</deck_card_name><deck_card_word_type>reading</deck_card_word_type><reading_deck_card_name>R2</reading_deck_card_name><writing_deck_card_name>W2</writing_deck_card_name></test_word>
+<test_word><index>2</index><word_id>-2390231914073158751</word_id><category>kpt 1.xml</category><text>
+
+밤낮 없이</text><definition>day &amp; night</definition><deck_card_name>R3</deck_card_name><deck_card_word_type>reading</deck_card_word_type><reading_deck_card_name>R3</reading_deck_card_name><writing_deck_card_name>W1</writing_deck_card_name></test_word>
+<house_deck_name>green</house_deck_name><house_deck_id>-1111111111111111111</house_deck_id></test_words>

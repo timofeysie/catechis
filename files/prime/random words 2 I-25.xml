@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<vocab>
+
+<word><text>고르다</text><definition>To choose</definition><writing-level>3</writing-level>
+<test><date>Sat Jan 08 18:51:32 PST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Fri Feb 25 11:12:51 PST 2005</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Fri Feb 25 11:14:22 PST 2005</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Mon Feb 28 23:26:42 PST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<reading-level>3</reading-level>
+<test><date>Thu Oct 27 10:58:30 KST 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Thu Oct 27 12:16:42 KST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Oct 31 20:26:04 KST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Nov 30 11:38:06 KST 2005</date><file>level 1 reading.test</file><grade>pass</grade></test>
+<test><date>Tue Dec 27 23:08:44 KST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Thu Dec 29 15:29:35 KST 2005</date><file>level 2 reading.test</file><grade>pass</grade></test>
+<test><date>Thu Feb 23 19:22:48 KST 2006</date><file>level 3 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Mar 30 19:13:01 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Apr 03 18:58:16 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Apr 10 00:02:50 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Tue Apr 18 18:48:12 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Thu Oct 19 19:44:09 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Fri Nov 03 18:17:38 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Nov 06 16:59:39 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Wed Nov 15 20:15:18 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Nov 27 17:50:35 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Tue Dec 12 21:24:56 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Fri Dec 15 19:42:05 KST 2006</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Thu Jan 04 09:14:25 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Thu Jan 18 09:45:40 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Jan 29 14:26:36 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Jan 29 16:11:34 KST 2007</date><file>level 3 reading.test</file><grade>pass</grade></test>
+<test><date>Sun Jun 17 21:22:03 KST 2007</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Sun Jun 17 21:38:11 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Mon Oct 03 00:56:45 KST 2005</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Oct 27 16:23:29 KST 2005</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Oct 27 16:24:02 KST 2005</date><file>level 0 reading.test</file><grade>fail</grade></test>
+<test><date>Thu Oct 27 16:24:14 KST 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+<test><date>Tue Apr 18 19:25:14 KST 2006</date><file>level 1 reading.test</file><grade>fail</grade></test>
+<test><date>Tue Apr 18 19:26:04 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+<test><date>Thu Jun 29 19:15:37 KST 2006</date><file>level 2 reading.test</file><grade>fail</grade></test>
+<test><date>Tue Jul 03 18:38:07 KST 2007</date><file>level 3 reading.test</file><grade>fail</grade></test><test><date>Tue Sep 11 03:57:41 KST 2007</date><file>level 2 reading.test</file><grade>fail</grade></test><test><date>Sat Sep 29 22:45:47 KST 2007</date><file>level 3 writing.test</file><grade>pass</grade></test><test><date>Tue Oct 16 17:35:48 KST 2007</date><file>level 1 reading.test</file><grade>pass</grade></test><test><date>Wed Dec 19 04:55:35 KST 2007</date><file>level 2 reading.test</file><grade>fail</grade></test><test><date>Thu Jan 03 14:57:11 KST 2008</date><file>level 1 reading.test</file><grade>fail</grade></test><test><date>Fri Jan 04 22:43:03 KST 2008</date><file>level 0 reading.test</file><grade>pass</grade></test><test><date>Tue Jan 08 08:41:05 KST 2008</date><file>level 3 writing.test</file><grade>pass</grade></test><test><date>Fri Mar 14 12:16:26 KST 2008</date><file>level 1 reading.test</file><grade>pass</grade></test><test><date>Mon Apr 21 20:02:28 KST 2008</date><file>level 3 writing.test</file><grade>pass</grade></test><test><date>Fri May 16 19:21:51 KST 2008</date><file>level 2 reading.test</file><grade>fail</grade></test><test><date>Mon Jun 30 23:17:48 KST 2008</date><file>level 1 reading.test</file><grade>fail</grade></test><test><date>Thu Aug 07 12:48:57 KST 2008</date><file>level 0 reading.test</file><grade>pass</grade></test><test><date>Mon Aug 25 15:05:15 KST 2008</date><file>level 1 reading.test</file><grade>pass</grade></test><test><date>Sat Oct 11 16:44:18 KST 2008</date><file>level 2 reading.test</file><grade>fail</grade></test><test><date>Tue Mar 24 13:23:27 KST 2009</date><file>level 3 writing.test</file><grade>pass</grade></test><test><date>Fri Aug 28 15:06:30 KST 2009</date><file>level 3 reading.test</file><grade>pass</grade></test><id>7158531945877004881</id><test><date>Thu Feb 25 18:03:23 KST 2010</date><file>level 3 writing.test</file><grade>pass</grade></test><test><date>Mon May 31 11:47:41 KST 2010</date><file>level 3 reading.test</file><grade>pass</grade></test><test><date>Wed Oct 20 12:48:55 KST 2010</date><file>level 3 writing.test</file><grade>pass</grade></test></word>
+
+</vocab>

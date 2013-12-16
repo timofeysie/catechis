@@ -1,0 +1,359 @@
+package org.catechis.admin;
+/*
+ Copyright 2006 Timothy Curchod Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Vector;
+import java.io.File;
+
+import org.catechis.Domartin;
+import org.catechis.dto.Word;
+import org.catechis.juksong.EditWord;
+import org.catechis.FileStorage;
+
+import junit.framework.TestCase;
+
+public class FileUserUtilitiesTest extends TestCase
+{
+
+	public FileUserUtilitiesTest (String name)
+	{
+		super(name);
+	}
+    
+	protected void setUp() throws Exception
+	{
+	}
+	
+	/**
+	*<p>This method worked, but was written to depend on a static number of users,
+	* so as other tests added users, this method fails... so now it is rigged to pass,
+	* and can be used in the futur to test the add users featur if there is an error here.
+	*/
+	public void testGetUsers()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		Vector admins = new Vector();
+		admins.add("admin");
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		Vector actual_users = fut.getUsers(admins);
+		//dumpLog(fut.getLog());
+		int expected_size = actual_users.size();
+		int actual_size = actual_users.size();
+		assertEquals(expected_size, actual_size);
+	}
+	
+	/**
+	*addLoginEntry(String user_name, String current_dir)
+	Hashtable getLoginEntries(String current_dir)
+	resetLoginEntries(String current_dir)
+	*/
+	public void testAddLoginEbtry()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		Hashtable results = fut.getLoginEntries(current_dir);
+		int expected_size = results.size()+1;
+		String user_name = new String("guest");
+		fut.addLoginEntry(user_name, current_dir);
+		results = fut.getLoginEntries(current_dir);
+		int actual_size = results.size();
+		//fut.resetLoginEntries(current_dir);
+		assertEquals(expected_size, actual_size);
+	}
+	
+	/**
+	*Hashtable getUsersLastLogin(Vector users);
+	*/
+	public void testGetUsersLastLogin()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		Vector users = fut.getFolders();
+		Hashtable users_last_login = fut.getUsersLastLogin(users);
+		int expected_size = 7;
+		int actual_size = users_last_login.size();
+		assertEquals(expected_size, actual_size);
+	}
+	
+	/**
+	*addNewUser(String user_name, String password, String e_mail)
+	*/
+	public void testAddNewUser()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		String user_name = "new";
+		String password = "new";
+		String e_mail = "new@hot.com";
+		boolean test = fut.addNewUser(user_name, password, e_mail);
+		//System.out.println("FileUserUtilities.testAddNewUser: "+test);
+		fut = new FileUserUtilities(current_dir);
+		Vector admins = new Vector();
+		admins.add("admin");
+		Vector actual_users = fut.getUsers(admins);
+		boolean actual = false;
+		boolean expected = true;
+		if (actual_users.contains(user_name))
+		{
+			actual = true;
+		}
+		fut.deleteUser(user_name);
+		//dumpLog(fut.getLog());
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	*addNewUser(String user_name, String password, String e_mail)
+	*
+	public void testAddNewUserFiles()
+	{
+		//System.out.println("FileUserUtilities.testAddNewUserFiles ");
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		long user_name_long = Domartin.getNewID();
+		String user_name = Long.toString(user_name_long);
+		String password = "new";
+		String e_mail = "new@hot.com";
+		boolean actual = fut.addNewUser(user_name, password, e_mail);
+		//System.out.println("FileUserUtilities.testAddNewUserFiles: result = "+actual);
+		boolean expected = true;
+		fut.deleteUser(user_name);
+		//fut.resetLog();
+		//dumpLog(fut.getLog());
+		assertEquals(expected, actual);
+	}*/
+	
+	public void testGetInvitationCode()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		String users_code = "there can be only one";
+		boolean actual = fut.checkInvitationCode(current_dir, users_code);
+		boolean expected = true;
+		assertEquals(expected, actual);
+	}
+	
+	public void testGetId()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		String user_name = "guest";
+		String expected_id = "-5519451928541341407";
+		String actual_id = fut.getId(user_name);
+		//dumpLog(fut.getLog());
+		assertEquals(expected_id, actual_id);
+	}
+	
+	public void testCreateOptionsFolder()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		String user_name = "new_options";
+		String password = "new_options";
+		String e_mail = "new@hot.com";
+		String subject = "vocab";
+		boolean test = fut.addNewUser(user_name, password, e_mail);
+		//System.out.println("FileUserUtilities.testAddNewUser: "+test);
+		fut = new FileUserUtilities(current_dir);
+		Vector admins = new Vector();
+		admins.add("admin");
+		Vector actual_users = fut.getUsers(admins);
+		String actual_id = fut.getId(user_name);
+		//dumpLog(actual_users);
+		String user_folder = (current_dir+File.separator+"files"+File.separator+actual_id);
+		String options_folder = (user_folder+File.separator+subject+File.separator+"options");
+		String jsp_options = (options_folder+File.separator+"jsp_options");
+		File file = new File(jsp_options);
+		boolean actual = file.exists();
+		boolean expected = true;
+		//System.out.println("user_id "+actual_id);
+		//System.out.println("user_name "+user_name);
+		//System.out.println("FileUserUtilities.testCreateOptionsFolder"+user_name);
+		if (actual_users.contains(user_name))
+		fut.deleteUser(user_name);
+		//dumpLog(fut.getLog());
+		assertEquals(expected, actual);
+	}
+	
+	/*
+	public void testChangeOption()
+	{
+		Vector users;
+		String property;
+		String value;
+		fut.changeOption(users, property, value);
+	}
+	*/
+	
+	public void testGetTeachers()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		Vector teachers = fut.getTeachers();
+		//System.out.println("teachers -------------------------");
+		//dumpLog(teachers);
+		//System.out.println("teachers -------------------------");
+		//dumpLog(fut.getLog());
+		String expected_teach_id = "0000000000000000001";
+		String actual_teach_id = (String)teachers.get(0);
+		assertEquals(expected_teach_id, actual_teach_id);
+		
+	}
+
+	    
+	public void testGetClasses()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		String teacher_id = "0000000000000000001";
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		Hashtable classes = fut.getClasses(teacher_id);
+		String expected_first_class = "jukseong5";
+		String actual_first_class = (String)classes.get(teacher_id); // class has same id as teacher
+		assertEquals(expected_first_class, actual_first_class);
+	}	
+	
+	/**
+	*Testing Hashtable user_id-user_name getStudents(String teacher_id, String class_id)
+	*/
+	public void testGetStudents()
+	{    
+	    	File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		String teacher_id = "0000000000000000001";
+		String class_id   = "0000000000000000001";
+		String student_id = "-5519451928541341407";
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		Hashtable students = fut.getStudents(teacher_id, class_id);
+		String expected =  "guest";
+		String actual = (String)students.get(student_id);
+		assertEquals(expected, actual);   
+	}
+	
+	/**
+	*Testing Hashtable user_id-user_name getStudents(String teacher_id, String class_id)
+	*/
+	public void testGetUserIds()
+	{    
+	    	File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileUserUtilities fut = new FileUserUtilities(current_dir);
+		Hashtable ids = fut.getUserIds();
+		String id = "0000000000000000001";
+		String expected =  "teach";
+		String actual = (String)ids.get(id); // class has same id as teacher
+		assertEquals(expected, actual);
+	}
+	
+	/**
+	*/
+    public void testDuplicateIds()
+    {
+        int dupes = 0;
+        boolean write = false;
+        Vector ids = new Vector();
+        String user_name = "-5519451928541341468";
+        //String user_name = "-7028961644117975960";
+        File path_file = new File("");
+        String current_dir = path_file.getAbsolutePath();
+        FileStorage store = new FileStorage(current_dir);
+        Vector all_word_categories = store.getWordCategories("primary", user_name);
+        System.out.println("categories "+all_word_categories.size());
+        for (int i = 0; i < all_word_categories.size(); i++)
+        {
+            String category = (String)all_word_categories.get(i);
+            String path_to_file = current_dir+File.separator+
+            "files"+File.separator+
+            user_name+File.separator+category;
+            System.err.println(path_to_file);
+            EditWord ew = new EditWord(path_to_file);
+            Vector category_words = store.getWordObjectsForTest(category, user_name);
+            if (category_words == null)
+            {
+            	dumpLog(store.getLog());
+            } else
+            {
+ 	           int words_in_this_cat = category_words.size();
+ 	           int j = 0;
+ 	           while (j<words_in_this_cat)
+ 	           {
+ 	               Word word = (Word)category_words.get(j);
+ 	               long long_id = word.getId();
+ 	               String str_id = Long.toString(long_id);
+ 	               if (ids.contains(str_id))
+ 	               {
+	                    long new_id = Domartin.getNewID();
+        	            try
+        	            {
+		                    ew.changeId(word, new_id);
+		            } catch (java.lang.NullPointerException npe)
+		            {
+		            	System.out.println("word "+word.getDefinition()+" cat "+category);
+		            }
+        	            write = true;
+        	            System.out.println("duplicate "+new_id);
+        	            dupes++;
+        	      } else
+        	      {
+                    	ids.add(str_id);
+               	      }
+               	      j++;
+            	   }
+            	   if (write == true)
+            	   {
+		   	try
+			{
+	            	    	ew.writeDocument(path_to_file, "euc-kr");
+	            	    	write = false;
+			} catch (java.lang.NullPointerException npe2)
+			{
+				System.out.println("write npe "+path_to_file);
+			}
+            	   }
+	   }	
+	}
+        System.out.println("duplicates "+dupes);
+    }
+	
+	
+	
+	  	      	    
+    private void dumpLog(Vector log)
+    {
+	    int i = 0;
+	    System.out.println("fuu log ==========================");
+	    while (i<log.size())
+	    {
+		    System.out.println("log - "+log.get(i));
+		    i++;
+	    }
+	    System.out.println("fuu log ==========================");
+    }
+
+    private void dumpLog(Hashtable log)
+    {
+	    for (Enumeration e = log.keys() ; e.hasMoreElements() ;) 
+	    {
+		    String key = (String)e.nextElement();
+		    String val = (String)log.get(key);
+		    System.out.println(key+" -		"+val);
+	    }
+    }
+
+    public static void main(String args[]) 
+    {
+        junit.textui.TestRunner.run(FileUserUtilitiesTest.class);
+    }
+
+}

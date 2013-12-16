@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user_options>
+<!--Options file for the Catechis Application.-->
+	<option>
+		<name>native_languge</name>
+		<value>English</value>
+	</option>
+	<option>
+		<name>language_being_learned</name>
+		<value>Korean</value>
+	</option>
+	<option>
+		<name>encoding</name>
+		<value>euc-kr</value>
+	</option>
+	<option>
+		<name>locale</name>
+		<value>ko_KR</value>
+	</option>
+<option><name>test_option</name><value>test_value</value></option>
+<option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option><option><name>test_option</name><value>test_value</value></option></user_options>

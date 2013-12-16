@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<status>
+	<daily_test_index>0:0</daily_test_index>
+	<daily_test_file>0</daily_test_file>
+	<tests>9579</tests>
+	<passed_tests>0</passed_tests>
+	<failed_tests>0</failed_tests>
+	<reversed_tests>0</reversed_tests>
+</status>

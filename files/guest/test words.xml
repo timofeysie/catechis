@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<vocab>
+	<word>
+		<text>바닷가</text>
+		<definition>beach</definition>
+		<writing-level>0</writing-level>
+		<reading-level>0</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 1 reading.test</file><grade>fail</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 1 writing.test</file><grade>fail</grade></test>
+	</word>
+		<word>
+		<text>바닷가</text>
+		<definition>second level 0</definition>
+		<writing-level>0</writing-level>
+		<reading-level>0</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 1 reading.test</file><grade>fail</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 1 writing.test</file><grade>fail</grade></test>
+	</word>
+	<word>
+		<text>바닷가</text>
+		<definition>beach1</definition>
+		<writing-level>1</writing-level>
+		<reading-level>1</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>fail</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>fail</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+	</word>
+	<word>
+		<text>바닷가</text>
+		<definition>beach2</definition>
+		<writing-level>2</writing-level>
+		<reading-level>2</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 1 reading.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 28 16:19:48 PDT 2005</date><file>level 1 writing.test</file><grade>pass</grade></test>
+	</word>
+</vocab>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vocab>
+
+<word>
+	<text>영화광</text>
+	<definition>movie buff</definition>
+	<id>-7501618212663067294</id>
+	<writing-level>3</writing-level>
+	<reading-level>3</reading-level>
+	<test><date>Mon Apr 24 18:55:42 KST 2006</date><file>level 1 writing.test</file><grade>pass</grade></test>
+	<test><date>Wed Oct 18 00:13:37 KST 2006</date><file>level 2 reading.test</file><grade>pass</grade></test>
+</word>
+
+<word>
+	<text>편</text>
+	<id>870726335763057778</id>
+	<definition>sequel</definition>
+	<writing-level>3</writing-level>
+	<reading-level>3</reading-level>
+	<test><date>Thu Feb 23 19:26:35 KST 2006</date><file>level 3 reading.test</file><grade>fail</grade></test>
+	<test><date>Wed Oct 18 00:15:13 KST 2006</date><file>level 2 writing.test</file><grade>pass</grade></test>
+</word>
+
+<word>
+	<text>취향</text>
+	<id>3693237959871027409</id>
+	<definition>taste</definition>
+	<writing-level>1</writing-level>
+	<reading-level>1</reading-level>
+	<test><date>Mon Apr 24 18:51:19 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+	<test><date>Sun Jun 17 22:20:01 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>
+	</word>
+
+<word>
+	<text>추천하다</text>
+	<definition>recommend</definition>
+	<id>-2672985807382824350</id>
+	<writing-level>3</writing-level>
+	<reading-level>1</reading-level>
+	<test><date>Sat Jan 29 18:56:58 PST 2005</date><file>level 3 writing.test</file><grade>pass</grade></test>
+	<test><date>Wed Aug 02 12:03:50 KST 2006</date><file>level 0 reading.test</file><grade>pass</grade></test>
+</word>
+
+<word>
+	<text>첫인상</text>
+	<definition>1st impression</definition>
+	<id>-4170333709727766993</id>
+	<writing-level>1</writing-level>
+	<reading-level>1</reading-level>
+	<test><date>Wed Oct 18 00:15:13 KST 2006</date><file>level 2 reading.test</file><grade>fail</grade></test>
+	<test><date>Thu Jan 04 17:43:38 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>	
+</word>
+
+<word><text>t1 - Fri Nov 16 18:55:44 KST 2012</text><definition>d1 - Fri Nov 16 18:55:44 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word><word><text>t2 - Fri Nov 16 18:55:44 KST 2012</text><definition>d2 - Fri Nov 16 18:55:44 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word><word><text>t1 - Fri Nov 16 19:06:22 KST 2012</text><definition>d1 - Fri Nov 16 19:06:22 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word><word><text>t2 - Fri Nov 16 19:06:22 KST 2012</text><definition>d2 - Fri Nov 16 19:06:22 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word><word><text>t1 - Fri Nov 16 19:51:43 KST 2012</text><definition>d1 - Fri Nov 16 19:51:43 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word><word><text>t2 - Fri Nov 16 19:51:43 KST 2012</text><definition>d2 - Fri Nov 16 19:51:43 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word><word><text>t1 - Fri Nov 16 19:54:59 KST 2012</text><definition>d1 - Fri Nov 16 19:54:59 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word><word><text>t2 - Fri Nov 16 19:54:59 KST 2012</text><definition>d2 - Fri Nov 16 19:54:59 KST 2012</definition><date-of-entry>0</date-of-entry><reading-level>0</reading-level><writing-level>0</writing-level><id>0</id></word></vocab>

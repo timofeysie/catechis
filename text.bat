@@ -1,0 +1,1 @@
+java junit.textui.TestRunner org.example.antbook.junit.SimpleTest

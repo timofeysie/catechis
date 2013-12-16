@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user_options>
+<!--Options file for a user of the Catechis Application.-->
+	<option>
+		<name>user_name</name>
+		<value>guest</value>
+	</option>
+</user_options>

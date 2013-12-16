@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <option>
+    <name>description</name>
+    <value>Test file</value>
+  </option>
+  <score>
+    <grade>70</grade>
+    <date>Mon Nov 01 22:26:22 PST 2004</date>
+  </score>
+    <score>
+    <grade>80</grade>
+    <date>Sun Aug 01 01:30:37 PST 2005</date>
+  </score>
+    <score>
+    <grade>90</grade>
+    <date>Mon Aug 15 08:09:00 PST 2005</date>
+  </score>
+</test>

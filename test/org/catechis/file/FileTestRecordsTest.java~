@@ -1,0 +1,808 @@
+package org.catechis.file;
+/*
+ Copyright 2006 Timothy Curchod Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+import java.io.File;
+import java.util.Date;
+import java.util.Vector;
+import java.util.Random;
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.Enumeration;
+import java.text.DecimalFormat;
+
+import junit.framework.TestCase;
+
+import org.catechis.FileStorage;
+import org.catechis.file.FileTestRecords;
+import org.jdom.Element;
+import org.jdom.Document;
+
+import org.catechis.dto.Word;
+import org.catechis.dto.Test;
+import org.catechis.dto.Momento;
+import org.catechis.dto.TestStats;
+import org.catechis.dto.AllTestStats;
+import org.catechis.dto.AllWordsTest;
+import org.catechis.dto.WordTestMemory;
+import org.catechis.dto.WordTestResult;
+import org.catechis.dto.WordTestRecordOptions;
+import org.catechis.file.FileTestRecords;
+import org.catechis.Domartin;
+import org.catechis.Transformer;
+import org.catechis.EncodeString;
+
+public class FileTestRecordsTest extends TestCase
+{
+
+    public FileTestRecordsTest(String name) 
+    {
+        super(name);
+    }
+    
+    protected void setUp() throws Exception
+    {
+	    
+
+    }
+    
+    // Testing: public String getRatioString(int index, int score)
+    public void testLoadDocument()
+    {
+	    String user_name = new String("guest");
+	    String type = new String("writing");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    String file_name = ("guest.hist");
+	    String path_to_test = new String(root_path+File.separator
+			+"files"+File.separator+user_name+File.separator+file_name);
+	    File test_name = new File(path_to_test);
+	    //System.out.println("FileTestRecordsTestswriteDocumentize.testLoadDocument: path - "+path_to_test);
+	    boolean exists = test_name.exists();
+	    //System.out.println("FileTestRecordsTestsize.testLoadDocument: exists - "+exists);
+	    FileTestRecords ftr = new FileTestRecords();
+	    Document doc = ftr.loadDocument(test_name);
+	    int size = doc.getContentSize();
+	    boolean actual = false;
+	    if (doc != null)
+	    {
+		    actual = true;
+	    }
+	    boolean expected = true;
+	    assertEquals(expected, actual);
+    }
+    
+    public void testLoadFile()
+    {
+	    String user_name = new String("guest");
+	    String type = new String("writing");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    String file_name = ("daily writing tests.record");
+	    String path_to_test = new String(root_path+File.separator
+			+"files"+File.separator+user_name+File.separator+file_name);
+	    File test_name = new File(path_to_test);
+	    boolean exists = test_name.exists();
+	    //System.out.println("FileTestRecords.testLoadFile: exists - "+exists);
+	    FileTestRecords ftr = new FileTestRecords();
+	    Document doc = ftr.loadDocument(test_name);
+	    int content_size = doc.getContentSize();
+	    //System.out.println("FileTestRecords.testLoadFile: content size - "+content_size);
+	    //System.out.println(doc.toString());
+	    int size = doc.getContentSize();
+	    boolean actual = false;
+	    if (doc != null)
+	    {
+		    actual = true;
+	    }
+	    boolean expected = true;
+	    assertEquals(expected, actual);
+    }
+    
+    public void testLoadFile2()
+    {
+	    String user_name = new String("guest");
+	    String type = new String("reading");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    String file_name = ("daily reading tests.record");
+	    String path_to_test = new String(root_path+File.separator
+			+"files"+File.separator+user_name+File.separator+file_name);
+	    File test_name = new File(path_to_test);
+	    boolean exists = test_name.exists();
+	    //System.out.println("FileTestRecords.testLoadFile: exists - "+exists);
+	    FileTestRecords ftr = new FileTestRecords();
+	    Document doc = ftr.loadDocument(test_name);
+	    //System.out.println("FileTestRecordsTest.testLoadFile2: doc size "+doc.getContentSize());
+	    int content_size = doc.getContentSize();
+	    //System.out.println("FileTestRecords.testLoadFile: content size - "+content_size);
+	    //System.out.println(doc.toString());
+	    int size = doc.getContentSize();
+	    boolean actual = false;
+	    if (doc != null)
+	    {
+		    actual = true;
+	    }
+	    boolean expected = true;
+	    assertEquals(expected, actual);
+    }
+    
+    public void testGetLastRecord()
+    {
+	    String user_name = new String("guest");
+	    String type = new String("writing");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    String file_name = ("guest.hist");
+	    String path_to_test = new String(root_path+File.separator
+			+"files"+File.separator+user_name+File.separator+file_name);
+	    File test_name = new File(path_to_test);
+	    boolean exists = test_name.exists();
+	    FileTestRecords ftr = new FileTestRecords();
+	    Document doc = ftr.loadDocument(test_name);
+	    int size = doc.getContentSize();
+	    Element e = (Element)ftr.getLastRecord(doc);
+	    Hashtable last_record = Transformer.elementIntoHash(e);
+	    int expected = 14;
+	    int actual = last_record.size();
+	    assertEquals(expected, actual);
+    }
+    
+    /**
+    *
+    public void testAddWordTestMemory()
+    {
+	    String type = new String("writing");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    String expected_date = new Date().toString();
+	    WordTestMemory wtm = new WordTestMemory();
+	    wtm.setType(type);
+	    wtm.setDate(expected_date);
+	    wtm.setScore("pass");
+	    wtm.setIndex(null);
+	    wtm.setNumberCorrect("number_correct");
+	    wtm.setTestName("level 0 writing.test");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    //System.out.println("FileTestRecordsTest.testRecordDailyTestRecord:  ===========");
+	    //System.out.println("FileTestRecordsTest.testRecordDailyTestRecord:  file "+file_name);
+	    FileTestRecords ftr = new FileTestRecords();
+	    ftr.addWordTestMemory(wtm, user_name, root_path);
+	    FileTestRecords ftr1 = new FileTestRecords();
+	    Vector tests = ftr1.getWordTestMemories(user_name, type, root_path);
+	    int size = tests.size();
+	    WordTestMemory wtm1 = (WordTestMemory)tests.get(size-1);
+	    String actual_date = wtm1.getDate();
+	    assertEquals(expected_date, actual_date);
+    }*/
+    
+    // Testing: public String getRatioString(int index, int score)
+    public void testAddDailyTestRecord()
+    {
+	    String encoding = "euc-kr";
+	    EncodeString encoder = new EncodeString();
+	    String type = new String("reading");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    String expected_date = new Date().toString();
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(root_path);
+	    Hashtable user_opts = store.getUserOptions(user_name, root_path);
+	    //boolean record_failed_tests = Boolean.getBoolean((String)user_opts.get("record_failed_tests"));
+	    boolean record_failed_tests = true;
+	    boolean record_passed_tests = Boolean.getBoolean((String)user_opts.get("record_passed_tests"));
+	    String record_exclude_level = (String)user_opts.get("record_exclude_level");
+	    int record_limit = Integer.parseInt((String)user_opts.get("record_limit"));
+	    long id = Domartin.getNewID();
+	    
+	    WordTestResult wtr = new WordTestResult();
+	    wtr.setText("text");
+	    wtr.setDefinition("def");
+	    wtr.setAnswer("and");
+	    wtr.setGrade("fail");
+	    wtr.setLevel("2");
+	    wtr.setId(1);
+	    wtr.setOriginalLevel("3");
+	    wtr.setEncoding(encoding);
+	    wtr.setDate(expected_date);
+	    wtr.setWordId(id);
+	    
+	    WordTestRecordOptions wtro = new WordTestRecordOptions();
+	    wtro.setType(type);
+	    wtro.setUserName(user_name);
+	    wtro.setRootPath(root_path);
+	    wtro.setRecordFailedTests(record_failed_tests);
+	    wtro.setRecordPassedTests(record_passed_tests);
+	    wtro.setRecordExcludeLevel(record_exclude_level);
+	    wtro.setRecordLimit(record_limit);
+	    
+	    // sleep well?  i guess the doc is null, thats why its saving nothing...
+	    
+	    //System.out.println("FileTestRecordsTest.testAddDailyTestRecord: path - "+root_path);
+	    FileTestRecords ftr = new FileTestRecords(root_path);
+	    ftr.setEncoding(encoding);
+	    Vector tests = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    //dumpLog(ftr.getLog());
+	    //ftr.resetLog();
+	    int size = tests.size();
+	    int expected_size = size + 1;
+	    ftr.addDailyTestRecord(wtr, wtro);
+	    //System.out.println("================= after add");
+	    //dumpLog(ftr.getLog());
+	    //ftr.resetLog();
+	    Vector tests1 = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    
+	    String name = ("daily "+type+" tests.record");
+	    String file_path = new String(root_path+File.separator
+				+"files"+File.separator+user_name+File.separator+name);
+	    File file = new File(file_path);
+	    boolean exists = file.exists();
+	    long length = file.length();
+	    //System.out.println("================= after 2nd get");
+	    //System.out.println("file exists "+exists);
+	    //System.out.println("FileTestRecordsTest.testAddDailyTestRecord:length "+length);
+	    //dumpObjects(tests1);
+	    int actual_size = tests1.size();
+	    assertEquals(expected_size, actual_size);
+    }
+    
+    /** Testing: public String getRatioString(int index, int score)
+    *label.menu=\uba54\ub274
+label.exit=\ub098\uac00\uae30
+label.open=\uc5f4\uae30
+label.save=\uc800\uc7a5\ud558\ub2e4
+label.add=\ub354\ud558\ub2e4
+label.edit=\ud3b8\uc9d1\ud558\ub2e4
+label.select=\uc120\ud0dd\ud558\ub2e4
+label.delete=\uc0ad\uc81c\ud558\ub2e4
+label.cancel=\ucde8\uc18c\ud558\ub2e4
+label.locale=\uc7a5\uc18c
+label.apply=\uc801\uc6a9\ud558\ub2e4
+label.settings=\ubc30\uacbd
+    public void testAddDailyTestRecord2()
+    {
+	    String encoding = "euc-kr"; 
+	    EncodeString encoder = new EncodeString();
+	    String type = new String("reading");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    String expected_date = new Date().toString();
+	    long id = Domartin.getNewID();
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(root_path);
+	    Hashtable user_opts = store.getUserOptions(user_name, root_path);
+	    boolean record_failed_tests = true;
+	    boolean record_passed_tests = Boolean.getBoolean((String)user_opts.get("record_passed_tests"));
+	    String record_exclude_level = (String)user_opts.get("record_exclude_level");
+	    int record_limit = Integer.parseInt((String)user_opts.get("record_limit"));
+	    
+	    WordTestResult wtr = new WordTestResult();
+	    wtr.setText("text");
+	    wtr.setDefinition("\uae30");
+	    wtr.setAnswer("and");
+	    wtr.setGrade("fail");
+	    wtr.setLevel("2");
+	    wtr.setId(1);
+	    wtr.setOriginalLevel("3");
+	    wtr.setDate(expected_date);
+	    wtr.setEncoding(encoding);
+	    wtr.setWordId(id);
+	    
+	    WordTestRecordOptions wtro = new WordTestRecordOptions();
+	    wtro.setType(type);
+	    wtro.setUserName(user_name);
+	    wtro.setRootPath(root_path);
+	    wtro.setRecordFailedTests(record_failed_tests);
+	    wtro.setRecordPassedTests(record_passed_tests);
+	    wtro.setRecordExcludeLevel(record_exclude_level);
+	    wtro.setRecordLimit(record_limit);
+	    
+	    //System.out.println("FileTestRecordsTest.testAddDailyTestRecord2: path - "+root_path);
+	    //System.out.println("FileTestRecordsTest.testAddDailyTestRecord2: encoding - "+encoding);
+	    FileTestRecords ftr = new FileTestRecords(root_path);
+	    ftr.setEncoding(encoding);
+	    Vector tests = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    //System.out.println("================= after get");
+	    //dumpLog(ftr.getLog());
+	    int size = tests.size();
+	    int expected_size = size + 3;
+	    ftr = new FileTestRecords(root_path);
+	    ftr.setEncoding(encoding);
+	    ftr.addDailyTestRecord(wtr, wtro);	//
+	    wtr.setWordId(id+1);
+	    ftr.addDailyTestRecord(wtr, wtro);	//
+	    wtr.setWordId(id+1);
+	    ftr.addDailyTestRecord(wtr, wtro);	//
+	    String name1 = ("daily "+type+" tests.record");
+	    String file_path1 = new String(root_path+File.separator
+				+"files"+File.separator+user_name+File.separator+name1);
+	    File file1 = new File(file_path1);
+	    boolean exists1 = file1.exists();
+	    long length1 = file1.length();
+	    //System.out.println("file exists "+exists1);
+	    //System.out.println("length "+length1); // 0
+	    //System.out.println("================= after add");
+	    Vector tests1 = ftr.getDailyTestRecords(user_name, type, root_path, user_opts); //
+	    
+	    String name = ("daily "+type+" tests.record");
+	    String file_path = new String(root_path+File.separator
+				+"files"+File.separator+user_name+File.separator+name);
+	    File file = new File(file_path);
+	    boolean exists = file.exists();
+	    long length = file.length();
+	    //System.out.println("file exists "+exists);
+	    System.out.println("FileTestRecordsTest.testAddDailyTestRecord2:length "+length);
+	    //System.out.println("================= after 2nd get");
+	    
+	    //dumpLog(ftr.getLog());
+	    dumpObjects(tests1);
+	    int actual_size = tests1.size();
+	    assertEquals(expected_size, actual_size);
+    }*/
+    
+    /*
+    *getWordTestMemoryRecords IS WORKING, BUT THIS TEST IS FLAWED, AND should be
+    * rewritten.
+     until then...
+    public void testGetWordTestMemory()
+    {
+	    String type = new String("writing");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileTestRecords ftr = new FileTestRecords();
+	    Vector tests = ftr.getWordTestMemoryRecords(user_name, type, root_path);
+	    int size =tests.size();
+	    WordTestMemory wtm = (WordTestMemory)tests.get(0);
+	    //String expected = "Fri Sep 14 01:04:44 KST";
+	    String expected = "Oct 26 21:18:06 KST 2007";
+	    String actual = Transformer.getLongDateFromMilliseconds(wtm.getDate());
+	    assertEquals(expected, actual);
+    }*/
+    
+    /**
+    *<p>Hashtable getSpecificDailyTestRecords(String user_name, String type, String root_path, Hashtable user_opts)
+    */
+    public void testGetSpecificDailyTestRecords()
+    {
+	    String type = new String("writing");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(root_path);
+	    Hashtable user_opts = store.getUserOptions(user_name, root_path);
+	    boolean record_failed_tests = Boolean.valueOf((String)user_opts.get("record_failed_tests")).booleanValue();
+	    boolean record_passed_tests = Boolean.valueOf((String)user_opts.get("record_passed_tests")).booleanValue();
+	    String record_exclude_level = (String)user_opts.get("record_exclude_level");
+	    int record_limit = Integer.parseInt((String)user_opts.get("record_limit"));
+	    WordTestRecordOptions wtro = new WordTestRecordOptions();
+	    wtro.setType(type);
+	    wtro.setUserName(user_name);
+	    wtro.setRootPath(root_path);
+	    wtro.setRecordFailedTests(record_failed_tests);
+	    wtro.setRecordPassedTests(record_passed_tests);
+	    wtro.setRecordExcludeLevel(record_exclude_level);
+	    wtro.setRecordLimit(record_limit);
+	    FileTestRecords ftr = new FileTestRecords();
+	    Hashtable words_defs = ftr.getSpecificDailyTestRecords(wtro);
+	    int actual_size = words_defs.size();
+	    //int expected_size = 15; // used to work
+	    int expected_size = 26;
+	    assertEquals(expected_size, actual_size);
+    }
+    
+    public void testGetDailyTestRecords()
+    {
+	    String type = new String("writing");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(root_path);
+	    Hashtable user_opts = store.getUserOptions(user_name, root_path);
+	    FileTestRecords ftr = new FileTestRecords();
+	    Vector tests = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    int actual_size = tests.size();
+	    //int expected_size = 95;
+	    int expected_size = 26;
+	    assertEquals(expected_size, actual_size);
+    }    
+    
+/* The xml files we created by hand would always return null when trying to
+* use the loaded doc, so we used this method to create sanitized versions...
+    public void testCreateTestRecord()
+    {
+	    Document doc = new Document();
+	    Element root = new Element("tests");
+	    Element test = new Element("test");
+	    Element cat = new Element("category");
+	    Element type = new Element("type");
+	    Element date = new Element("date");
+	    Element score = new Element("score");
+	    Element index = new Element("index");
+	    Element num_c = new Element("number_correct");
+	    Element level = new Element("level");
+	    Element te_na = new Element("test_name");
+	    cat.addContent("cat.xml");
+	    type.addContent("writing");
+	    date.addContent("Wed 04 Jul 2007");
+	    score.addContent("pass");
+	    index.addContent("-1");
+	    num_c.addContent("1");
+	    level.addContent("0");
+	    te_na.addContent("daily reading test.record");
+	    test.addContent(cat);
+	    test.addContent(type);
+	    test.addContent(date);
+	    test.addContent(score);
+	    test.addContent(index);
+	    test.addContent(num_c);
+	    test.addContent(level);
+	    test.addContent(te_na);
+	    root.addContent(test);
+	    doc.addContent(root);
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    String user_name = new String("guest");
+	    String file_name = ("daily reading tests.record");
+	    String path_to_file = new String(root_path+File.separator
+			+"files"+File.separator+user_name+File.separator+file_name);
+	    System.out.println("FileTestRecordsTest:  creating");
+	    FileTestRecords ftr = new FileTestRecords();
+	    ftr.writeDocument(doc, path_to_file);
+	    dumpLog(ftr.getLog());
+	    //ftr.recordDailyTestRecord(WordTestMemory wtm, String user_name)
+	    //String expected = new String("test");
+	    //String actual = (String)actual_users.get("tester");
+	    //assertEquals(expected, actual);
+    }
+    */
+    
+    /*
+    public void testGetDailyTestRecords()
+    {
+	    String type = new String("writing");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileTestRecords ftr = new FileTestRecords();
+	    Vector tests = ftr.getWordTestMemoryRecords(user_name, type, root_path);
+	    int size =tests.size();
+	    WordTestMemory wtm = (WordTestMemory)tests.get(0);
+	    String expected = "Wed 04 Jul 2007";
+	    String actual = wtm.getDate();
+	    assertEquals(expected, actual);
+    }*/
+    
+    public void testGetLastUserHistoryHash()
+    {
+	    String type = new String("writing");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileTestRecords ftr = new FileTestRecords();
+	    Hashtable result = ftr.getLastUserHistoryHash(user_name, root_path);
+	    DecimalFormat formatter = new DecimalFormat("###.##");
+	    boolean expected = true;
+	    boolean actual = false;
+	    if (result!=null)
+	    {
+		    actual = true;
+	    }
+	    assertEquals(expected, actual);
+    }
+    
+    /*
+    public void testRecordHashAsXML()
+    {
+	    Hashtable wtm_hash = new Hashtable();
+	    wtm_hash.put("type","writing");
+	    wtm_hash.put("date","Thu May 05 15:43:13 PDT 2005");
+	    wtm_hash.put("score","pass");
+	    wtm_hash.put("index","null");
+	    wtm_hash.put("numberCorrect","number_correct");
+	    wtm_hash.put("testName","level 0 writing.test");
+	    String expected_key = Long.toString(new Date().getTime());
+	    wtm_hash.put(expected_key, expected_key);
+	    String type = new String("writing");
+	    String file_name = ("sample.record");
+	    String root_child = "test";
+	    String user_name = "guest";
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    //String file_name = ("daily "+type+" tests.record");
+	    String path_to_file = new String(root_path+File.separator
+			+"files"+File.separator+user_name+File.separator+file_name);
+	    //System.out.println("FileTestRecords.testRecordHashAsXML "+path_to_file);
+	    FileTestRecords ftr = new FileTestRecords(file_name);
+	    ftr.recordHashAsXML(wtm_hash, root_child, path_to_file, user_name);
+	    //dumpLog(ftr.getLog());
+	    //FileTestRecords ftr1 = new FileTestRecords();
+	    //Vector tests = ftr1.getDailyTestRecords(user_name, type, root_path);
+	    //int size = tests.size();
+	    //WordTestMemory wtm1 = (WordTestMemory)tests.get(size-1);
+	    //String actual_key = wtm1.getDate();
+	    //assertEquals(expected_date, actual_date);
+    }*/
+    
+    /**
+    *This method actually just erases the test record.
+    */
+    public void testReverseTestRecord()
+    { 
+	    String encoding = "euc-kr";
+	    EncodeString encoder = new EncodeString();
+	    String type = new String("reading");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    String expected_date = new Date().toString();
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(root_path);
+	    Hashtable user_opts = store.getUserOptions(user_name, root_path);
+	    boolean record_failed_tests = true;
+	    boolean record_passed_tests = true;
+	    String record_exclude_level = (String)user_opts.get("record_exclude_level");
+	    int record_limit = Integer.parseInt((String)user_opts.get("record_limit"));
+	    long id = Domartin.getNewID();
+	    
+	    WordTestResult wtr = new WordTestResult();
+	    wtr.setText("text");
+	    wtr.setDefinition("def");
+	    wtr.setAnswer("and");
+	    wtr.setGrade("fail");
+	    wtr.setLevel("1");
+	    wtr.setId(1);
+	    wtr.setOriginalLevel("2");
+	    wtr.setEncoding(encoding);
+	    wtr.setDate(expected_date);
+	    wtr.setWordId(id);
+	    
+	    WordTestRecordOptions wtro = new WordTestRecordOptions();
+	    wtro.setType(type);
+	    wtro.setUserName(user_name);
+	    wtro.setRootPath(root_path);
+	    wtro.setRecordFailedTests(record_failed_tests);
+	    wtro.setRecordPassedTests(record_passed_tests);
+	    wtro.setRecordExcludeLevel(record_exclude_level);
+	    wtro.setRecordLimit(record_limit);
+	    wtro.setWordId(id);
+	    
+	    FileTestRecords ftr = new FileTestRecords(root_path);
+	    ftr.setEncoding(encoding);
+	    Vector tests = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    int size = tests.size();
+	    int expected_size = size;
+	    //System.out.println("FileTestRecordsTest.testReverseTestRecord before add ---- size "+size);
+	    ftr.addDailyTestRecord(wtr, wtro);
+	    Vector tests2 = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    int size2 = tests2.size();
+	    //System.out.println("FileTestRecordsTest.testReverseTestRecord after add ---- size "+size2);
+	    //dumpLog(ftr.getLog());
+	    //System.out.println("FileTestRecordsTest.testReverseTestRecord after add ----");
+	    ftr.resetLog();
+	    //System.out.println("FileTestRecordsTest.testReverseTestRecord search id "+id);
+	    ftr = new FileTestRecords(root_path);
+	    ftr.setEncoding(encoding);
+	    ftr.reverseTestRecord(wtr, wtro);
+	    //dumpLog(ftr.getLog());
+	    ftr = new FileTestRecords(root_path);
+	    ftr.setEncoding(encoding);
+	    Vector tests3 = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    int actual_size = tests3.size();
+	    //dumpObjects(tests3);
+	    //System.out.println("FileTestRecordsTest.testReverseTestRecord after del ----"+actual_size);
+	    assertEquals(expected_size, actual_size);
+    }
+    
+    public void testAddDailyTestRecordLimit()
+    {
+	    String encoding = "euc-kr";
+	    EncodeString encoder = new EncodeString();
+	    String type = new String("reading");
+	    String user_name = new String("guest");
+	    String file_name = ("daily "+type+" tests.record");
+	    String expected_date = new Date().toString();
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(root_path);
+	    Hashtable user_opts = store.getUserOptions(user_name, root_path);
+	    boolean record_failed_tests = Boolean.getBoolean((String)user_opts.get("record_failed_tests"));
+	    boolean record_passed_tests = Boolean.getBoolean((String)user_opts.get("record_passed_tests"));
+	    String record_exclude_level = (String)user_opts.get("record_exclude_level");
+	    int record_limit = 1;
+	    
+	    WordTestResult wtr = new WordTestResult();
+	    wtr.setText("text");
+	    wtr.setDefinition("def");
+	    wtr.setAnswer("and");
+	    wtr.setGrade("pass");
+	    wtr.setLevel("0");
+	    wtr.setId(1);
+	    wtr.setOriginalLevel("1");
+	    wtr.setDate(expected_date);
+	    wtr.setEncoding(encoding);
+	    wtr.setDate(expected_date);
+	    wtr.setWordId(999);
+	    
+	    WordTestRecordOptions wtro = new WordTestRecordOptions();
+	    wtro.setType(type);
+	    wtro.setUserName(user_name);
+	    wtro.setRootPath(root_path);
+	    wtro.setRecordFailedTests(record_failed_tests);
+	    wtro.setRecordPassedTests(record_passed_tests);
+	    wtro.setRecordExcludeLevel(record_exclude_level);
+	    wtro.setRecordLimit(record_limit);
+	    
+	    FileTestRecords ftr = new FileTestRecords();
+	    Vector tests = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    int size = tests.size();
+	    int expected_size = size;
+	    ftr.addDailyTestRecord(wtr, wtro);
+	    tests = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    int actual_size = tests.size();	// test size should be the same as record limit is set to 1.
+	    assertEquals(expected_size, actual_size);
+    }
+    
+    /**
+    * clearTestRecord(String type, String user_name, String root_path)
+    */
+    public void testClearTestRecord()
+    {
+	    String type = new String("reading");
+	    String user_name = new String("rof_guest");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileTestRecords ftr = new FileTestRecords();
+	    ftr.clearTestRecord(type, user_name, root_path);
+	    //dumpLog(ftr.getLog());
+	    FileStorage store = new FileStorage(root_path);
+	    Hashtable user_opts = store.getUserOptions(user_name, root_path);
+	    Vector tests = ftr.getDailyTestRecords(user_name, type, root_path, user_opts);
+	    int expected_size = 0;
+	    int actual_size = tests.size();
+	    assertEquals(expected_size, actual_size);
+    }
+    
+    public void testUpdateTestsStatus()
+    {
+	    String type = new String("reading");
+	    String user_name = new String("rof_guest");
+	    String subject = new String("vocab");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileTestRecords ftr = new FileTestRecords(root_path);
+	    int original = ftr.getTestsStatus(user_name, subject);
+	    //System.out.println("FileTestRecordsTest.testUpdateTestsStatus oringinal "+original);
+	    int actual_size = ftr.updateTestsStatus(user_name, subject);
+	    //System.out.println("FileTestRecordsTest.testUpdateTestsStatus actual "+actual_size);
+	    //dumpLog(ftr.getLog());
+	    int expected_size = original+1;
+	    assertEquals(expected_size, actual_size);
+    }
+    
+    /**
+    *setDailyTestMark(String user_name, String subject, int i, int j)
+    */
+    public void testSetGetDailyTestMark()
+    {
+	    String type = new String("reading");
+	    String user_name = new String("rof_guest");
+	    String subject = new String("vocab");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    Random generator = new Random();
+	    int i = generator.nextInt();
+	    int j = generator.nextInt();
+	    String expected = Integer.toString(i)+":"+Integer.toString(j);
+	    FileTestRecords ftr = new FileTestRecords(root_path);
+	    ftr.setDailyTestMark(user_name, subject, i, j);
+	    String actual = ftr.getDailyTestMark(user_name, subject);
+	    //System.out.println("FileTestRecordsTest.testUpdateTestsStatus extpectd "+expected);
+	    //System.out.println("FileTestRecordsTest.testUpdateTestsStatus actual "+actual);
+	    //dumpLog(ftr.getLog());
+	    assertEquals(expected, actual);
+    }
+    
+    /**
+    *Testing Momento getMomentoObject(String user_name, String subject)
+    *<p>The momento has the following properties:
+    * action_name, action_time, action_id, action_type
+    */
+    public void testGetMomentoObject()
+    {
+	    //System.out.println("FileTestRecordsTest.testGetMomentoObject --------");
+	    //String type = new String("reading");
+	    String user_name = new String("test_user");
+	    String subject = new String("vocab");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileTestRecords ftr = new FileTestRecords(root_path);    
+	    Momento m = ftr.getMomentoObject(user_name, subject);
+	    String actual = m.getActionName();
+	    String expected = "default";
+	    //System.out.println("FileTestRecordsTest.testUpdateTestsStatus extpectd "+expected);
+	    //dumpLog(ftr.getLog());
+	    //System.out.println(Transformer.createTable(m));
+	    assertEquals(expected, actual);
+    }
+    
+    /**
+    *Testing setMomentoObject(String user_name, String subject, Momento m)
+    *<p>The momento has the following properties:
+    * action_name, action_time, action_id, action_type
+    */
+    public void testSetMomentoObject()
+    {
+	    //System.out.println("FileTestRecordsTest.testSetMomentoObject --------");
+	    //String type = new String("reading");
+	    Momento m = new Momento();
+	    m.setActionName("default1");
+	    m.setActionTime("default");
+	    m.setActionId("0");
+	    m.setActionType("default");
+	    String user_name = new String("test_user");
+	    String subject = new String("vocab");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    FileTestRecords ftr = new FileTestRecords(root_path);
+	    ftr.setMomentoObject(user_name, subject, m);
+	    Momento m1 = ftr.getMomentoObject(user_name, subject);
+	    String actual = m1.getActionName();
+	    String expected = "default1";
+	    // revert back to old value
+	    m.setActionName("default");
+	    ftr.setMomentoObject(user_name, subject, m);
+	    assertEquals(expected, actual);
+    }
+    
+    private void dumpLog(Vector log)
+    {
+	    int size = log.size();
+	    System.out.println("dumping log with size "+size);
+	    int i = 0;
+	    while (i<log.size())
+	    {
+		    System.out.println("log - "+log.get(i));
+		    i++;
+	    }
+
+    }
+    
+    private void dumpLog(Hashtable log)
+    {
+	    for (Enumeration e = log.keys() ; e.hasMoreElements() ;) 
+	    {
+		    String key = (String)e.nextElement();
+		    String val = (String)log.get(key);
+		    System.out.println(key+" -		"+val);
+	    }
+    }
+    
+    private void dumpObjects(Vector objs)
+    {
+	    int size = objs.size();
+	    System.out.println("dumping log with size "+size);
+	    int i = 0;
+	    while (i<size)
+	    {
+		    System.out.println(Transformer.createTable(objs.get(i)));
+		    i++;
+	    }
+
+    }    
+
+    public static void main(String args[]) 
+    {
+        junit.textui.TestRunner.run(FileTestRecordsTest.class);
+    }
+
+}
+

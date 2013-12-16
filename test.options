@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<user_options>
+<!--Options test file.-->
+	<option>
+		<name>test</name>
+		<value>value</value>
+	</option>
+
+</user_options>

@@ -1,0 +1,31 @@
+package org.catechis.constants;
+
+public class Constants
+{
+
+	public static final String READING = "reading";
+	public static final String WRITING = "writing";
+
+	public static final String TRUE = "true";
+	public static final String FALSE = "false";
+	public static final String PASS = "pass";
+	public static final String FAIL = "fail";
+	
+	public static final String WNTD = "wntd";
+	public static final String WLTD = "wltd";
+	
+	public static final String FILES = "files";
+	public static final String VOCAB = "vocab";
+	public static final String LISTS = "lists";
+	public static final String TESTS = "tests";
+	public static final String SAVED = "saved";
+	public static final String OPTIONS = "options";
+	public static final String JSP_OPTIONS = "jsp_options";
+	
+	public static final String DEFAULT = "default";
+	
+	public Constants()
+	{
+	}
+	
+}

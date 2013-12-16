@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<passwords>
+	<invitation_code>there can be only one</invitation_code>
+	<user>
+		<id>-5519451928541341007</id>
+		<name>admin</name>
+		<password>admin</password>
+	</user>
+	<user>
+		<id>0000000000000000001</id>
+		<name>teach</name>
+		<password>teach</password>
+	</user>
+	<user>
+		<id>-5519451928541341407</id>
+		<name>guest</name>
+		<password>pass</password>
+	</user>
+	<user>
+		<id>9000000000000000001</id>
+		<name>tester</name>
+		<password>test</password>
+	</user>
+
+	<user>
+		<id>-4500429194402377875</id>
+		<name>new_options</name>
+		<password>new_options</password>
+		<e_mail>new@hot.com</e_mail>
+	</user>
+	
+	<user>
+		<id>-5519451928541341468</id>
+		<name>old t</name>
+		<password>t</password>
+		<e_mail>new@hot.com</e_mail>
+	</user>
+
+<user><id>-5760154295424797770</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>8076409687218381475</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>7336920417595175481</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>-3576988708279504193</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>-1100118750492140710</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>1204370963706192833</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>-7769572781864283778</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>-7492669761869543194</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>2493917657454593724</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user><user><id>8238016854633490079</id><name>new_options</name><password>new_options</password><e_mail>new@hot.com</e_mail></user></passwords>

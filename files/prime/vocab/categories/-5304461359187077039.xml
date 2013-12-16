@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<word_category><name>medical.xml</name><category_type>exclusive</category_type><creation_time>1306582301323</creation_time><category_words><simple_word><word_id>2018743335155087612</word_id><word_path>medical.xml</word_path><text>
+채용</text><definition>employment</definition></simple_word><simple_word><word_id>5244935571322438227</word_id><word_path>medical.xml</word_path><text>
+간염</text><definition>hepatitis</definition></simple_word><simple_word><word_id>-8461880644236273590</word_id><word_path>medical.xml</word_path><text>
+신장</text><definition>height</definition></simple_word><simple_word><word_id>721727785611065867</word_id><word_path>medical.xml</word_path><text>
+체중</text><definition>weight</definition></simple_word><simple_word><word_id>-3157703444877838154</word_id><word_path>medical.xml</word_path><text>
+음성</text><definition>negative</definition></simple_word><simple_word><word_id>5771976300198760692</word_id><word_path>medical.xml</word_path><text>정상</text><definition>normal</definition></simple_word><simple_word><word_id>-2405460701390759060</word_id><word_path>medical.xml</word_path><text>
+흉위</text><definition>chest size</definition></simple_word><simple_word><word_id>-3234289699666440885</word_id><word_path>medical.xml</word_path><text>
+혈앞</text><definition>blood pressure</definition></simple_word><simple_word><word_id>2009420096188677401</word_id><word_path>medical.xml</word_path><text>
+신체</text><definition>physical</definition></simple_word></category_words></word_category>

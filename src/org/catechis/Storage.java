@@ -1,0 +1,77 @@
+package org.catechis;
+/*
+ Copyright 2006 Timothy Curchod Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+import java.util.Vector;
+import java.util.Hashtable;
+import java.util.ArrayList;
+import org.catechis.dto.Word;
+import org.catechis.dto.WordFilter;
+import org.catechis.dto.AllWordStats;
+import org.catechis.dto.AllTestStats;
+import org.catechis.dto.AllWordsTest;
+import org.catechis.dto.WordTestMemory;
+import org.catechis.dto.WordTestResult;
+import org.catechis.dto.AllStatsHistory;
+import org.catechis.dto.WordLastTestDates;
+
+public interface Storage
+{
+	Hashtable findUsers();
+	Vector getUserLists();
+	String getRole();
+	String getType(String content_name);
+	Hashtable getWordsDefs(String content_name, String user_name);
+	Hashtable getTests(String content_name, String user_name);
+	Vector getWordObjects(String content_name, String user_name);
+	Vector getWordObjectsForTest(String content_name, String user_name);
+	Word getWordObject(String search_property, String search_value, String category, String user_name);
+	Vector getTestCategories(String user_name);
+	Vector getCategories(String user_name);
+	Vector getWordCategories(String content_name, String user_name);
+	Vector getFilteredWordObjects(WordFilter word_filter, String user_name);
+	AllTestStats getTestStats(Vector tests, String user_name);
+	AllWordStats getWordStats(Vector words, String user_name);
+	Vector getAllStatsHistory(String user_name);
+	long updateHistory(AllTestStats all_test_stats, AllWordStats all_word_stats, String user_name);
+	void addAllStatsHistory(AllStatsHistory all_stats_history, String user_name);
+	void saveSessionHistory(AllTestStats all_test_stats, AllWordStats all_word_stats, String user_id);
+	void login(String user);
+	void loggit(String msg);
+	void setTests(Vector tests);
+	void setWords(Vector words);
+	void setOther(Vector other);
+	void updateWord(WordTestMemory wtm, WordTestResult wtr, String user_name, String encoding);
+	String updateWordLevel(WordTestMemory wtm, WordTestResult wtr, String user_name, String encoding);
+	void updateTest(WordTestMemory wtm, String new_score, String user_name);
+	Word getWordWithoutTests(String text, String category, String user_name);
+	void addWord(Word word, String category, String user_name, String encoding);
+	void deleteWord(Word word, String category, String user_name, String encoding);
+	void editWord(Word old_word, Word new_word, String category, String user_name, String encoding);
+	ArrayList getWordLastTestDatesList(WordLastTestDates wltd, String user_name, String subject); 		// get a lists with millisecond keys sorted by date with word objects attached
+	ArrayList getAdjustedWordLastTestDatesList(WordLastTestDates wltd, String user_name);
+	String getPathToFiles();
+	WordTestResult scoreSingleWordTest(AllWordsTest awt, String user_name);
+	String recordWordTestScore(WordTestResult wtr, AllWordsTest awt, String max_level, String test_name, String user_name);
+	Hashtable getUserOptions(String user_name, String context_path);
+	Hashtable getTeacherOptions(String teacher_id, String context_path);
+	Vector getNewWordsList(String type, String user_name);
+	Vector getNewWordsList(String type, String user_name, String subject);
+	Vector getNoRepeatsNewWordsList(String type, Vector previous_list, String user_name);
+	void retireWord(Word word, String category, String user_name, String encoding);
+	/**
+	 * *** Not implemented.  We call fuo.createNewLists when deleting a word instead of saving keys everytime we create lists.
+	 *<p> This method is called in this way:
+	 *<p> com.businessglue.struts.options.UpdateOptionsConfirmAction
+	 *<p>FileUserOptions.createNewLists(user_id, subject, context_path);	
+	 *<p>WordLastTestDates.createNewLists(categories, store, user_id);
+	 *<p>The category DOM should be in memory when this method is called.
+	 * @param wntd_file_key_r
+	 * @param wntd_file_key_w
+	 * @param word_id
+	 */
+	void saveWTDKeys(String wntd_file_key_r, String wntd_file_key_w, long word_id); // so a word can be deleted later
+	void writeJDOMDocument(String file_name);
+	Vector getLog(); // used in JDOMSolution in one method so far...
+	void resetLog();
+}

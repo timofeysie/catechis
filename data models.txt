@@ -1,0 +1,82 @@
+- save place in daily test reached
+- don't roll over daily test number
+- words stats on separate link
+- edit exclude and include periods
+- missed words list
+- try  max Daily Words List and 
+adjust exclude levels to get an 
+acceptable # of words...
+- record running total of pass/fails
+- calculate words # of words with diff
+r/w levels
+
+* failed level 1 tests corrected goes 
+ back to level 1, not up to 2,
+* except when the old level is 0
+* test record in word file is not reversed
+
+Data Models
+
+AllWordsTest (set in DailyTestAction)
+	// data kept on xml file
+	private String text;
+	private String definition;
+	private String category;
+	private String test_type;
+	private String level;
+	private int daily_test_index;
+	// users answers
+	private String answer;
+
+WordTestResult (set in DailyTestResultAction)
+	  String text;
+	  String definition;
+	  String answer;
+	  String grade;
+	  String level;
+	  int id;
+	  String original_text;
+	  String original_definition;
+	  String original_level;
+	  String encoding;
+	  String date;
+	  
+WordTestMemory (set in ChangeUpdateAction)
+	String category; *
+	String type; *
+	String date;
+	String score;
+	String index;
+	String number_correct;
+	String test_name;
+ 
+Current Stats
+	  total_word_tests
+	  total_reading
+	  totla_writing
+	  reading_passed
+	  writing_passed
+	  
+	 
+Data stored in reading/writing tests.records
+============================================	  
+ WordTestMemory
+	String category;
+	String type;
+	String date;
+	String score;
+	String index;
+	String number_correct;
+	String test_name;
+WordTestResult
+	  String text;
+	  String definition;
+	  String answer;
+	  String level;
+	  int id;
+	  String original_text;
+	  String original_definition;
+	  String original_level;
+	  String encoding;
+Not needed in WTR: grade & encoding
+

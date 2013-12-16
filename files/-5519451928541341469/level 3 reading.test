@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<test>
+  <option>
+    <name>description</name>
+    <value>This is a simple 10 word English to Korean text.</value>
+  </option>
+  <option>
+    <name>type</name>
+    <value>reading</value>
+  </option>
+  <option>
+    <name>length</name>
+    <value>10</value>
+  </option>
+  <option>
+    <name>levels</name>
+    <value>3-3</value>
+  </option>
+  <option>
+    <name>index</name>
+    <value>0</value>
+  </option>
+  <option>
+    <name>shuffle</name>
+    <value>yes</value>
+  </option>
+<score><grade>90</grade><date>Mon Jun 27 15:48:23 PDT 2005</date></score><score><grade>70</grade><date>Thu Feb 23 19:10:05 KST 2006</date></score><score><grade>100</grade><date>Thu Feb 23 19:13:30 KST 2006</date></score><score><grade>90</grade><date>Thu Feb 23 19:15:51 KST 2006</date></score><score><grade>90</grade><date>Thu Feb 23 19:17:11 KST 2006</date></score><score><grade>75</grade><date>Thu Feb 23 19:17:53 KST 2006</date></score><score><grade>70</grade><date>Thu Feb 23 19:18:47 KST 2006</date></score><score><grade>70</grade><date>Thu Feb 23 19:20:33 KST 2006</date></score><score><grade>88</grade><date>Thu Feb 23 19:22:48 KST 2006</date></score><score><grade>40</grade><date>Thu Feb 23 19:24:24 KST 2006</date></score><score><grade>70</grade><date>Thu Feb 23 19:25:40 KST 2006</date></score><score><grade>71</grade><date>Thu Feb 23 19:26:35 KST 2006</date></score><score><grade>40</grade><date>Thu Feb 23 19:28:09 KST 2006</date></score><score><grade>85</grade><date>Thu Feb 23 19:29:28 KST 2006</date></score><score><grade>37</grade><date>Thu Feb 23 19:30:46 KST 2006</date></score><score><grade>50</grade><date>Thu Feb 23 19:32:30 KST 2006</date></score><score><grade>100</grade><date>Sun Nov 05 22:30:33 KST 2006</date></score><score><grade>90</grade><date>Mon Jan 29 16:08:31 KST 2007</date></score><score><grade>60</grade><date>Mon Jan 29 16:09:58 KST 2007</date></score><score><grade>60</grade><date>Mon Jan 29 16:11:34 KST 2007</date></score><score><grade>70</grade><date>Mon Jan 29 16:12:56 KST 2007</date></score><score><grade>100</grade><date>Tue Feb 27 00:03:27 KST 2007</date></score><score><grade>100</grade><date>Tue Feb 27 00:05:39 KST 2007</date></score><score><grade>60</grade><date>Tue Feb 27 00:11:33 KST 2007</date></score><score><grade>60</grade><date>Tue Feb 27 00:16:13 KST 2007</date></score><score><grade>70</grade><date>Tue Feb 27 00:21:04 KST 2007</date></score><score><grade>0</grade><date>Tue Feb 27 00:28:39 KST 2007</date></score><score><grade>80</grade><date>Tue Feb 27 00:32:14 KST 2007</date></score><score><grade>30</grade><date>Tue Feb 27 00:33:26 KST 2007</date></score><score><grade>100</grade><date>Tue Jul 03 18:30:36 KST 2007</date></score><score><grade>90</grade><date>Tue Jul 03 18:34:03 KST 2007</date></score><score><grade>100</grade><date>Tue Jul 03 18:34:57 KST 2007</date></score><score><grade>80</grade><date>Tue Jul 03 18:36:10 KST 2007</date></score><score><grade>90</grade><date>Tue Jul 03 18:38:07 KST 2007</date></score><score><grade>60</grade><date>Tue Jul 03 18:38:53 KST 2007</date></score><score><grade>87</grade><date>Tue Jul 03 18:39:41 KST 2007</date></score><score><grade>50</grade><date>Tue Jul 03 18:40:13 KST 2007</date></score></test>

@@ -1,0 +1,249 @@
+	package org.catechis.file;
+/*
+ Copyright 2007 Timothy Curchod Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+import java.io.File;
+import java.util.Date;
+import java.util.Vector;
+import java.util.Hashtable;
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Enumeration;
+import junit.framework.TestCase;
+
+import org.catechis.dto.Word;
+import org.catechis.dto.Test;
+import org.catechis.dto.UserInfo;
+import org.catechis.dto.SavedTest;
+import org.catechis.Transformer;
+import org.catechis.FileStorage;
+import org.catechis.dto.TestStats;
+import org.catechis.JDOMSolution;
+import org.catechis.dto.SavedTest;
+import org.catechis.dto.AllTestStats;
+import org.catechis.dto.AllWordsTest;
+import org.catechis.dto.WordTestMemory;
+import org.catechis.dto.WordTestResult;
+import org.catechis.dto.WordLastTestDates;
+import org.catechis.file.FileEdit;
+import org.catechis.file.FileSaveTests;
+import org.catechis.file.FileCategories;
+import org.catechis.testing.SaveTest;
+import org.catechis.constants.Constants;
+import org.catechis.testing.TestUtility;
+
+public class FileSaveTestsTest extends TestCase
+{
+
+    public FileSaveTestsTest(String name) 
+    {
+        super(name);
+    }
+    
+    protected void setUp() throws Exception
+    {
+
+    }
+    
+    /**
+    * fromWLTDsToFile(String user_id, String subj, WordLastTestDates wltd, ArrayList key_list, SavedTest saved_test)
+    */
+    public void testFromWLTDsToFile()
+    {
+	    String user_id = new String("test_user");
+	    String subject = new String("vocab");
+	    //String encoding = new String("euc-kr");
+	    String encoding = new String("UTF-8");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    UserInfo user_info = new UserInfo(encoding, root_path, user_id, subject);
+	    //dumpLog(Transformer.createTable(user_info));
+	    // original file
+	    FileSaveTests f_save_tests = new FileSaveTests();
+	    SaveTest save_test = new SaveTest(f_save_tests);
+	    
+	    Test[] tests = new Test[1];
+	    Test test1 = new Test();
+	    test1.setDate("Mon Aug 15 08:09:00 PST 2005");
+	    test1.setName("level 0 reading.test");
+	    test1.setGrade("pass");
+	    tests[0] = test1;
+	    Word word1 = new Word();
+	    word1.setText("text1");
+	    word1.setDefinition("def1");
+	    word1.setId(Long.parseLong("1111111111111111111"));
+	    word1.setTests(tests);
+	    word1.setCategory("some file1.xml");
+	    Word word2 = new Word();
+	    word2.setText("text2");
+	    word2.setDefinition("def2");
+	    word2.setId(Long.parseLong("2222222222222222222"));
+	    word2.setTests(tests);
+	    word2.setCategory("some file2.xml");
+	    String type = new String("reading"); 
+	    Vector elt_vector = new Vector(); // exclude level time in days
+	    elt_vector.add("1");
+	    elt_vector.add("14");
+	    elt_vector.add("30");
+	    elt_vector.add("90");
+	    Date today = new Date();
+	    long now = today.getTime();
+	    String today_now = Long.toString(now);
+	    WordLastTestDates wltd = new WordLastTestDates();
+	    wltd.setExcludeLevelTimes(elt_vector);
+	    wltd.setType(type);
+	    wltd.setLimitOfWords(100);
+	    wltd.setSubject(Constants.VOCAB);
+	    wltd.addWord(word1, today_now);
+	    wltd.addWord(word2, today_now);
+	    
+	    ArrayList key_list = wltd.getSortedWLTDKeys();; 
+	    SavedTest saved_test = new SavedTest();
+	    	saved_test.setTestId("1111111111111111111");
+		saved_test.setTestDate(today_now);
+		saved_test.setTestName("testie");
+		saved_test.setTestType("reading");
+		saved_test.setTestStatus("pending");
+		saved_test.setTestFormat("DailyTest");
+		saved_test.setCreationTime(today_now);
+	    save_test.fromWLTDsToFile(user_info, wltd, key_list, saved_test);
+	    Vector saved_tests_list = save_test.loadSavedTests(user_info);
+	    dumpLog(save_test.getLog());
+	    dumpSavedTestsList(saved_tests_list);
+	    //String actual = actual_word.getText();
+	    //String expected = new String("sexy");
+	    //assertEquals(expected, actual);
+    }
+    
+    /**
+    * This method needs to support:
+    * Hashtable user_opts = store.getUserOptions(user_id, context_path);
+    * Word word = store.getWordObject("id", Long.toString(awt.getId()), awt.getCategory(), user_info.getId());
+    * Momento old_m = ftr.getMomentoObject(user_id, subject);
+	* FileJDOMWordLists fjdomwl =  new FileJDOMWordLists(root_path, Constants.READING, user_id);
+	* fjdomwl.removeWordFromNewWordsList(Long.toString(word_id), encoding);
+	* FileTestRecords ftr = new FileTestRecords(root_path);
+	* ftr.addDailyTestRecord(wtr, wtro);
+	* WordLastTestDates wltd = new WordLastTestDates();
+	* TestTimeMemory ttm = wltd.updateTestDateRecordsAndReturnMemory(user_id, context_path, wtr);
+	* Momento new_m = new Momento("IntegratedTestResultAction", Long.toString(new Date().getTime()), "default", "default");
+	* ftr.setMomentoObject(user_id, subject, new_m);
+<id>-4647875113887576714</id></word>
+<word><text>gorueda</text><definition>To choose</definition><writing-level>3</writing-level>
+<test><date>Sat Jan 08 18:51:32 PST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<test><date>Fri Feb 25 11:12:51 PST 2005</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Fri Feb 25 11:14:22 PST 2005</date><file>level 0 writing.test</file><grade>fail</grade></test>
+<test><date>Mon Feb 28 23:26:42 PST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+<reading-level>1</reading-level>
+
+// data kept on xml file
+	private String text;
+	private String definition;
+	private String category;
+	private String test_type;
+	private String level;
+	private int daily_test_index;
+	private long id;
+	private String answer;
+	
+	
+    */
+    public void testScoreSavedTest()
+    {
+    	    String user_id = new String("test_user");
+	    String subject = new String("vocab");
+	    //String encoding = new String("euc-kr");
+	    String encoding = new String("UTF-8");
+	    String category = ("october.xml");
+	    File path_file = new File("");
+	    String root_path = path_file.getAbsolutePath();
+	    
+	    String copy_cat = new String("october2 copy.xml");
+	    String original_path = new String(root_path+File.separator+"files"+File.separator+user_id+File.separator+category);
+	    File original_file = new File(original_path);
+	    String duplicate_path = new String(root_path+File.separator+"files"+File.separator+user_id+File.separator+copy_cat);
+	    File duplicate_file = new File(duplicate_path);
+	    FileStorage fs = new FileStorage();
+	    fs.copyFile(original_file, duplicate_file);
+	    
+	    UserInfo user_info = new UserInfo(encoding, root_path, user_id, subject);
+	    FileSaveTests f_save_tests = new FileSaveTests();
+	    SaveTest save_test = new SaveTest(f_save_tests);
+	    Date today = new Date();
+	    long now = today.getTime();
+	    String today_now = Long.toString(now);
+	    SavedTest saved_test = new SavedTest();
+	    saved_test.setTestId("1111111111111111111");
+	    saved_test.setTestDate(today_now);
+	    saved_test.setTestName("testie");
+	    saved_test.setTestType("reading");
+	    saved_test.setTestStatus("pending");
+	    saved_test.setTestFormat("DailyTest");
+	    saved_test.setCreationTime(today_now);
+	    Vector awt_list = new Vector();
+	    
+	    AllWordsTest awt1 = new AllWordsTest();
+	    awt1.setText("gorueda");
+	    awt1.setDefinition("To choose");
+	    awt1.setCategory(copy_cat);
+	    awt1.setTestType("type");
+	    awt1.setId(Long.parseLong("-4647875113887576714"));
+	    awt1.setAnswer(Constants.PASS);
+
+	    AllWordsTest awt2 = new AllWordsTest();
+	    awt2.setText("shallow");
+	    awt2.setDefinition("shallow");
+	    awt2.setCategory(copy_cat);
+	    awt2.setTestType("type");
+	    awt2.setId(Long.parseLong("-4647875113887576715"));
+	    awt2.setAnswer(Constants.FAIL);
+	    
+	    awt_list.add(awt1);
+	    awt_list.add(awt2);
+	    TestUtility test_utility = new TestUtility();
+    	    Vector wltds_list = test_utility.scoreSavedTest(user_info, saved_test, awt_list);
+	    dumpLog(test_utility.getLog());
+    	
+    }
+    
+    private void dumpSavedTestsList(Vector tests_list)
+    {
+	    int i = 0;
+	    while (i<tests_list.size())
+	    {
+		    SavedTest saved_test = (SavedTest)tests_list.get(i);
+		    System.out.println("------------ "+i);
+		    dumpLog(Transformer.createTable(saved_test));
+		    System.out.println("------------ "+i);
+		    i++;
+	    }
+
+    }
+    
+    private void dumpLog(Hashtable log)
+    {
+	    for (Enumeration e = log.keys() ; e.hasMoreElements() ;) 
+	    {
+		    String key = (String)e.nextElement();
+		    String val = (String)log.get(key);
+		    System.out.println(key+" -		"+val);
+	    }
+    }
+
+    private void dumpLog(Vector log)
+    {
+	    int i = 0;
+	    while (i<log.size())
+	    {
+		    System.out.println("log - "+log.get(i));
+		    i++;
+	    }
+
+    }
+    
+    public static void main(String args[]) 
+    {
+        junit.textui.TestRunner.run(FileEditTest.class);
+    }
+
+}

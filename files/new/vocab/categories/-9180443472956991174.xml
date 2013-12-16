@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<word_category><name>Test</name><category_type>exclusive</category_type><creation_time>1337622643494</creation_time><category_words><simple_word><word_id>1</word_id><word_path>test.xml</word_path><text>text1</text><definition>def1</definition></simple_word><simple_word><word_id>2</word_id><word_path>test.xml</word_path><text>text2</text><definition>def2</definition></simple_word></category_words></word_category>

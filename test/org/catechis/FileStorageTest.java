@@ -1,0 +1,987 @@
+package org.catechis;
+/*
+ Copyright 2006 Timothy Curchod Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+import java.io.File;
+import java.util.Date;
+import java.util.Vector;
+import java.util.Hashtable;
+import java.util.Properties;
+import java.util.Enumeration;
+import junit.framework.TestCase;
+
+import org.catechis.constants.Constants;
+import org.catechis.dto.AllWordStats;
+import org.catechis.dto.Momento;
+import org.catechis.dto.Word;
+import org.catechis.dto.Test;
+import org.catechis.dto.TestStats;
+import org.catechis.dto.AllTestStats;
+import org.catechis.dto.AllWordsTest;
+import org.catechis.dto.WordTestMemory;
+import org.catechis.dto.WordTestResult;
+import org.catechis.Transformer;
+import org.catechis.file.FileCategories;
+import org.catechis.file.FileJDOMWordLists;
+import org.catechis.file.FileTestRecords;
+
+import org.catechis.JDOMSolution;
+
+public class FileStorageTest extends TestCase
+{
+
+    public FileStorageTest(String name) 
+    {
+        super(name);
+    }
+    
+    protected void setUp() throws Exception
+    {
+
+    }
+    
+    // Testing: public String getRatioString(int index, int score)
+    public void testFindUsers()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Hashtable actual_users = store.findUsers();
+	    String expected = new String("test");
+	    String actual = (String)actual_users.get("tester");
+	    assertEquals(expected, actual);
+    }
+
+    /** Testing loading a dummy.test file that contains one test.
+    * Set project root path, create a FileStorage object
+    */
+    public void testGetTests()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Hashtable actual_tests = store.getTests("dummy", "test_user");
+	    String expected_date  = new String("Mon Nov 01 22:26:22 PST 2004");
+	    String expected_grade = new String("90");
+	    String actual_date  = new String();
+	    String actual_grade = new String();
+	    
+		Enumeration e = actual_tests.keys();
+		while (e.hasMoreElements())
+		{
+			actual_grade = (String)e.nextElement();
+			actual_date = (String)actual_tests.get(actual_grade);
+		}
+	    
+	    String actual_score = (String)actual_tests.get(expected_date);
+	    assertEquals(expected_grade, actual_grade);
+    }
+	    
+    
+    public void testGetWordObjects()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector actual_words = store.getWordObjects("word", "test_user");
+	    Word first_word = (Word)actual_words.get(0);
+	    String actual_definition = first_word.getDefinition();
+	    String expected_definition = new String("beach");
+	    int expected_writing_level = 6;
+	    int actual_writing_level = first_word.getWritingLevel();
+	    int actual_reading_level = first_word.getReadingLevel();
+	    assertEquals(expected_definition, actual_definition);
+	    assertEquals(expected_writing_level, actual_writing_level);
+    }
+    
+    public void testGetTestCategories()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector actual_tests = store.getTestCategories("test_user");
+	    //dumpLog(store.getLog());
+	    Vector expected_tests = new Vector();
+	    expected_tests.add("dummy.test");
+	    expected_tests.add("sample.test");
+	    assertEquals(expected_tests, actual_tests);
+    }
+    
+    /**
+    *This test depends on the number of word categories in the guest file.
+    */
+    public void testGetGuestCategories()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector actual_categories = store.getWordCategories("primary", "guest");
+	    Vector expected_categories = new Vector();
+	    //dumpLog(actual_categories);
+	    int actual_size = actual_categories.size();
+	    int expected_size = 40;	// this could change
+	    //System.out.println("size "+actual_categories.size());
+	    assertEquals(expected_size, actual_size);
+    }
+    
+    /*
+    This method works, but is difficult to test w.o knowing beforehand what folders are in the files folder
+    public void testGetWordCategories()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector actual_tests = store.getWordCategories("primary", "test_user");
+	    Vector expected_tests = new Vector();
+	    expected_tests.add("sample copy.xml");
+	    expected_tests.add("october.xml");
+	    expected_tests.add("word.xml");
+	    expected_tests.add("test2.xml");
+	    expected_tests.add("date test words.xml");
+	    expected_tests.add("test words.xml");
+	    expected_tests.add("word1.xml");
+	    expected_tests.add("struts-config.xml");
+	    expected_tests.add("word2.xml");
+	    assertEquals(expected_tests, actual_tests);
+    }*/
+    
+    /*expected:
+    <[sample copy.xml, test2.xml, october.xml, word.xml, date test words.xml, test words.xml]> 
+    but was:
+    <[sample copy.xml, october.xml, word.xml, test2.xml, date test words.xml, test words.xml]>
+    */
+    
+    /**
+    * Created September 18th, 2005.
+    * FileStorage.getTestStats: dummy.test 1 90.0 Mon Nov 01 22:26:22 PST 2004
+    * FileStorage.getTestStats: sample.test 3 80.0 Mon Aug 15 08:09:00 PST 2005
+    *This tests fdailes with: expected:<...15c62bc> but was:<...5660d6>
+    * because we cant equate arrays.
+    *
+    public void testGetTestStats()
+    {
+	    //System.out.println("FileStorage.testGetTestStats: starting this test");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector tests = store.getTestCategories("test_user");
+	    AllTestStats actual_all_test_stats = store.getTestStats(tests, "test_user");
+	    TestStats [] actual_test = actual_all_test_stats.getTestStats();
+	    AllTestStats expected_all_test_stats = new AllTestStats();
+	    TestStats [] ts;
+	    ts = new TestStats [2];
+	    expected_all_test_stats.setTestStats(ts);
+	    
+	    // dummy.test file
+	    TestStats dummy_test_stats = new TestStats();
+	    dummy_test_stats.setName("dummy.test");
+	    dummy_test_stats.setTotalTests(1);
+	    dummy_test_stats.setAverageScore(90.0);
+	    dummy_test_stats.setLastDate("Mon Nov 01 22:26:22 PST 2004");
+	    expected_all_test_stats.setTestStats(0, dummy_test_stats);
+	    
+	    // sample.test file has three tests, with an average of 80.
+	    TestStats sample_test_stats = new TestStats();
+	    sample_test_stats.setName("sample.test");
+	    sample_test_stats.setTotalTests(3);
+	    sample_test_stats.setAverageScore(80.0);
+	    sample_test_stats.setLastDate("Mon Aug 15 08:09:00 PST 2005");
+	    expected_all_test_stats.setTestStats(1, sample_test_stats);
+	    
+	    String expected_ats = expected_all_test_stats.toString();
+	    String actual_ats = actual_all_test_stats.toString();
+	    assertEquals(expected_ats, actual_ats);
+    }*/
+    
+    public void testUpdateWord()
+    {
+	// First, copy the old file
+		File path_file = new File("");
+		String user = new String("test_user");
+	        String current_dir = path_file.getAbsolutePath();
+	        String orig_cat = new String("test words.xml");
+		String copy_cat = new String("new test words.xml");
+		Properties properties = System.getProperties();
+		String sep = new String(properties.getProperty("file.separator"));
+		String original_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+orig_cat);
+		File original_file = new File(original_path);
+		String duplicate_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+copy_cat);
+		File duplicate_file = new File(duplicate_path);
+		FileStorage fs = new FileStorage();
+		fs.copyFile(original_file, duplicate_file);
+	// Then, create the test memory objects
+		WordTestMemory wtm = new WordTestMemory();
+		wtm.setCategory(copy_cat);
+		wtm.setType("reading");
+		wtm.setDate("Mon Aug 15 08:09:00 PST 2005");
+		WordTestResult wtr = new WordTestResult();
+		wtr.setText("바닷가");
+		wtr.setDefinition("a beach");
+		wtr.setAnswer("dang");
+		wtr.setGrade("pass");
+		wtr.setId(0);
+		wtr.setOriginalText("바닷가");
+	// Then get down to the business of using the method under test
+		String encoding = new String("euc-kr");
+		FileStorage store = new FileStorage(current_dir);
+		store.updateWord(wtm, wtr, "test_user", encoding);
+	// Now we check the results against the old copied opbjects
+		Word original_word = store.getWordWithoutTests("바닷가", orig_cat, user);
+		String text_or_def = new String("ding");
+		String type = new String("definition");
+		Word duplicate_word = store.getWordWithoutTests("바닷가", copy_cat, user);
+		String actual_def = duplicate_word.getDefinition();
+		String expected_def = new String("a beach");
+		duplicate_file.delete();
+		assertEquals(expected_def, actual_def);
+    }
+    
+    /**
+    *Lets try and cheat on this test:
+    *  <score>
+    *   <grade>70</grade>
+    *   <date>Mon Nov 01 22:26:22 PST 2004</date>
+    *  </score>
+    */
+    public void testUpdateTest()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    String user = new String("test_user");
+	    String orig_cat = new String("sample.test");
+	    String copy_cat = new String("sample copy.test");
+	    String original_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+orig_cat);
+	    File original_file = new File(original_path);
+	    String duplicate_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+copy_cat);
+	    File duplicate_file = new File(duplicate_path);
+	    FileStorage fs = new FileStorage();
+	    fs.copyFile(original_file, duplicate_file);
+	    WordTestMemory wtm = new WordTestMemory();
+	    wtm.setCategory(copy_cat);
+	    wtm.setType("reading");
+	    wtm.setDate("Mon Nov 01 22:26:22 PST 2004");
+	    wtm.setScore("80");
+	    wtm.setIndex("10");
+	    Vector log = Transformer.createTable(wtm);
+	    String new_score = new String("80");
+	    Storage store = new FileStorage(current_dir);
+	    store.updateTest(wtm, new_score, user);
+	    String expected_grade = new String("80");
+	    JDOMSolution jdom = new JDOMSolution(duplicate_file);
+	    Hashtable tests = jdom.getWhateverHash("score","date","grade");
+	    String actual_grade = (String)tests.get("Mon Nov 01 22:26:22 PST 2004");
+	    duplicate_file.delete();
+	    assertEquals(expected_grade, actual_grade);
+    }
+    
+    public void testAddWord()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    Word word = new Word();
+	    word.setText("textual");
+	    word.setDefinition("contextual");
+	    String original = new String("word.xml");
+	    String user_name = new String("test_user");
+	    String encoding = new String("UTF-8");
+	    String invalid_encoding_name1 = new String("eu-kr");
+	    String invalid_encoding_name2 = new String("ms949");
+	    String user = new String("test_user");
+	    String copy_cat = new String("word copy.xml");
+	    String original_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+original);
+	    File original_file = new File(original_path);
+	    String duplicate_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+copy_cat);
+	    File duplicate_file = new File(duplicate_path);
+	    FileStorage fs = new FileStorage();
+	    fs.copyFile(original_file, duplicate_file);
+	    FileStorage store = new FileStorage(current_dir);
+	    store.copyFile(original_file, duplicate_file);
+	    //System.out.println("copied "+duplicate_file);
+	    //dumpLog(store.getLog());
+	    store.addWord(word, copy_cat, user_name, encoding);
+	    Vector actual_words = store.getWordObjects(copy_cat, user_name);
+	    int actual = actual_words.size();
+	    int expected = 2;
+	    duplicate_file.delete();
+	    assertEquals(expected, actual);
+    }
+    
+    /**
+	*
+		AllWordsTest
+	// data kept on xml file
+	private String text;
+	private String definition;
+	private String category;
+	private String test_type;
+	// users answers
+	private String answer;
+	
+		WordTestResult
+	private String text;
+	private String definition;
+	private String answer;
+	private String grade;
+	private String level;
+	private int id;
+	private String original_text;
+	private String original_definition;
+	private String original_level;
+	
+	?How do we get user options?
+	?How do we communicate with Storage to get at JDOM?
+	Answer= we send all the info JDOM needs back in the wtr
+		and then FileStorage calls the following:
+		words_jdom.recordWordScore(question, "pass", test_name, date, test_type, max_level);
+		(Note the date will be set in jdom now)
+		Also, original, and new levels must be gotten later...
+	// writing: def/question - text/answer
+	// reading: text/key - answer/def
+	java.lang.NullPointerException 
+	at org.catechis.JDOMSolution.<init>(JDOMSolution.java:82) 
+	at org.catechis.FileStorage.getWordObject(FileStorage.java:269) 
+	at org.catechis.FileStorage.scoreSingleWordTest(FileStorage.java:781) 
+	at org.catechis.FileStorageTest.testScoreSingleWordTest(FileStorageTest.java:320)
+	
+	*/
+    public void testScoreSingleWordFailTest()
+    {
+	    String user_name = new String("test_user");
+	    String file_name = new String("word");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    //System.out.println(current_dir);
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector actual_words = store.getWordObjects(file_name, user_name);
+	    Word first_word = (Word)actual_words.get(0);
+	    String actual_definition = first_word.getDefinition();
+	    String expected_definition = new String("beach");
+	    int expected_writing_level = 6;
+	    int actual_writing_level = first_word.getWritingLevel();
+	    int actual_reading_level = first_word.getReadingLevel();
+	    
+	    AllWordsTest awt = new AllWordsTest();
+	    awt.setText(first_word.getText());
+	    awt.setDefinition(first_word.getDefinition());
+	    awt.setCategory(file_name);
+	    awt.setTestType("reading");
+	    awt.setAnswer("the wrong answer");
+	    WordTestResult wtr = store.scoreSingleWordTest(awt, user_name);
+	    //dumpLog(store.getLog());
+	    String expected_grade = new String("fail");
+	    String actual_grade = wtr.getGrade();
+	    assertEquals(expected_grade, actual_grade);
+    }
+    
+    public void testScoreSingleWordPassTest()
+    {
+	    String user_name = new String("test_user");
+	    String file_name = new String("test2");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	   // System.out.println(current_dir);
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector actual_words = store.getWordObjects(file_name, user_name);
+	    Word first_word = (Word)actual_words.get(0);
+	    String actual_definition = first_word.getDefinition();
+	    String expected_definition = new String("test");
+	    int expected_writing_level = 2;
+	    int actual_writing_level = first_word.getWritingLevel();
+	    int actual_reading_level = first_word.getReadingLevel();
+	    
+	    AllWordsTest awt = new AllWordsTest();
+	    awt.setText(first_word.getText());
+	    awt.setDefinition(first_word.getDefinition());
+	    awt.setCategory(file_name);
+	    awt.setTestType("reading");
+	    awt.setAnswer("test");
+	    WordTestResult wtr = store.scoreSingleWordTest(awt, user_name);
+	    String expected_grade = new String("pass");
+	    String actual_grade = wtr.getGrade();
+	    assertEquals(expected_grade, actual_grade);
+    }
+    
+    /**
+    *<p>This test takes the code from the DailyTestResultAction where a single
+    *word test is scored with the new Scorer methods inside the catechis package.
+    *<p>The commented out areas are from the Action, and the rest of the code is
+    * equivalent test code to highlight the problem we are having with the Scorer.
+    *
+    */
+    public void testSingleWordCompleteTest()
+    {		
+	        //String user_name = (String)session.getAttribute("user_name");
+		//String context_path = context.getRealPath("/WEB-INF/");
+		//FileStorage store = new FileStorage(context_path, context);
+	    String user_name = new String("guest");
+	    String file_name = new String("text-def");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+		//ArrayList key_list = (ArrayList)session.getAttribute("actual_key_list"); // if this is null then we create it next
+		//WordLastTestDates wltd = (WordLastTestDates)session.getAttribute("wltd"); // the list of words and their key assosiations
+		//AllWordsTest awt = (AllWordsTest)session.getAttribute("awt_test_word");	// this object holds the original word testedprrrrrrrrrrr
+            AllWordsTest awt = new AllWordsTest();
+	    awt.setText("text");
+	    awt.setDefinition("definition");
+	    awt.setCategory(file_name);
+	    awt.setTestType("reading");
+	    awt.setAnswer("definition");		
+		//printLog(Transformer.createTable(awt), context);
+		//Hashtable user_opts = store.getUserOptions(user_name, context_path);
+		//String max_level = (String)user_opts.get("max_level");
+		//String test_level = awt.getLevel();
+		//String test_type = awt.getTestType();
+		//String test_name = new String("level "+test_level+" "+test_type+".text");
+	   String max_level = "3";
+	   String test_level = "3";
+	   String test_type = "reading";
+	   String test_name = new String("level "+test_level+" "+test_type+".test");
+		//DailyTestForm test_form = (DailyTestForm)form; 		// test form
+		//String answer = test_form.getAnswer();			// bingo!!!
+		//awt.setAnswer(answer);
+	   String answer = "definition";
+	   awt.setAnswer(answer);
+		
+		//WordTestResult wtr = store.scoreSingleWordTest(awt, user_name);
+		//context.log("DailyTestResultAction.perform wtr.grade ==== "+wtr.getGrade());printLog(store.getLog(), context);
+		//store.recordWordTestScore(wtr, awt, max_level, test_name, user_name);
+		//wtr.setAnswer(answer);
+	   WordTestResult wtr = store.scoreSingleWordTest(awt, user_name);
+	   //System.out.println(wtr.getGrade());dumpLog(store.getLog());
+	   //store.recordWordTestScore(wtr, awt, max_level, test_name, user_name);
+	   wtr.setAnswer(answer);
+		//int total_words = 0;
+		//Long key = (Long)key_list.get(0);			// get key for word tested
+		//wltd.removeWord(key);					// remove the word object from the store of words
+		//key_list.remove(key);					// remove the key from the key list
+	   String expected_grade = new String("pass");
+	   String actual_grade = wtr.getGrade();
+	   assertEquals(expected_grade, actual_grade);
+    }
+    
+    /**
+    *<p>THis method is used in the DailTestScoreAction object.  It is called like this:
+    * store.recordWordTestScore(wtr, awt, max_level, test_name, user_name);
+    *<p>Inside the FileStorage method, the following calls are made:
+    		String path_to_words = getPathToFile(category, user_name);
+		File words_file = new File(path_to_words);
+		String file = words_file.getAbsolutePath();
+		JDOMSolution jdom = new JDOMSolution(words_file, this);
+		jdom.recordWordScore(question, grade, test_name, date, test_type, max_level, org_level);
+    */
+    public void testRecordWordScore()
+    {
+	    String test_type = "reading";
+	    String max_level = "3";
+	    String test_level = "3";
+	    String test_name = new String("level "+test_level+" "+test_type+".test");
+	    String category = "text-def";
+	    String text = new String("text");
+	    String def = new String("definition");
+	    String user_name = new String("guest");
+	    String file_name = new String("text-def");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    AllWordsTest awt = new AllWordsTest();
+	    awt.setText(text);
+	    awt.setDefinition(def);
+	    awt.setCategory(category);
+	    awt.setTestType(test_type);
+	    awt.setAnswer(def);
+	    awt.setLevel("3");
+// AllWordsTest: text, definition, category, test_type, level, answer
+	    WordTestResult wtr = new WordTestResult();
+	    wtr.setText(text);
+	    wtr.setDefinition(def);
+	    wtr.setAnswer(def); 
+	    wtr.setGrade("pass");
+	    wtr.setLevel("3");
+	    wtr.setId(0);
+	    wtr.setOriginalText(text);
+	    wtr.setOriginalDefinition(def);
+	    wtr.setOriginalLevel("3"); //could also check what is the most recent test and if we use now, then it will be the most recent.
+	    wtr.setEncoding("euc-kr");
+// WordTestResult: text, definition, answer, grade, level, int id, original_text, original_definition, original_level, encoding
+	    String search_property = "text";
+	    String search_value = "text";
+	    Word word = store.getWordObject(search_property, search_value, category, user_name);
+	    Test tests [] = word.getTests();
+	    //System.out.println("RecordWordScore -------");
+	    //dumpLog(store.getLog());
+	    //System.out.println("RecordWordScore -------");
+	    int number_of_tests = tests.length;
+	   store.recordWordTestScore(wtr, awt, max_level, category, user_name);
+	   //System.out.println("RecordWordScore -------");
+	   //dumpLog(store.getLog());
+	   //System.out.println("RecordWordScore -------");
+	   int expected_number_of_tests = number_of_tests + 1;
+	   word = store.getWordObject(search_property, search_value, category, user_name);
+	   tests = word.getTests();
+	   int actual_number_of_tests = tests.length;
+	   assertEquals(expected_number_of_tests, actual_number_of_tests);
+    }
+    
+       /**
+    *<p>THis method is used in the DailTestScoreAction object.  It is called like this:
+    * store.recordWordTestScore(wtr, awt, max_level, test_name, user_name);
+    *<p>Inside the FileStorage method, the following calls are made:
+    		String path_to_words = getPathToFile(category, user_name);
+		File words_file = new File(path_to_words);
+		String file = words_file.getAbsolutePath();
+		JDOMSolution jdom = new JDOMSolution(words_file, this);
+		jdom.recordWordScore(question, grade, test_name, date, test_type, max_level, org_level);
+    */
+    public void testRecordAndWriteWordScore()
+    {
+	    String test_type = "reading";
+	    String max_level = "3";
+	    String test_level = "3";
+	    //String test_name = new String("level "+test_level+" "+test_type+".test");
+	    String category = "text-def";
+	    String text = new String("text");
+	    String def = new String("definition");
+	    String user_name = new String("guest");
+	    String file_name = new String("text-def");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    AllWordsTest awt = new AllWordsTest();
+	    awt.setText(text);
+	    awt.setDefinition(def);
+	    awt.setCategory(category);
+	    awt.setTestType(test_type);
+	    awt.setAnswer(def);
+	    awt.setLevel("3");
+	    WordTestResult wtr = new WordTestResult();
+	    wtr.setText(text);
+	    wtr.setDefinition(def);
+	    wtr.setAnswer(def);
+	    wtr.setGrade("pass");
+	    wtr.setLevel("3");
+	    wtr.setOriginalText(text);
+	    wtr.setOriginalDefinition(def);
+	    wtr.setOriginalLevel("3"); //could also check what is the most recent test and if we use now, then it will be the most recent.
+	    wtr.setEncoding("euc-kr");
+	    String search_property = "text";
+	    String search_value = "text";
+	    Word word = store.getWordObject(search_property, search_value, category, user_name);
+	    //System.out.println("testRecordAndWriteWordScore ------- word ----------");
+	    //dumpLog(Transformer.createTable(word));
+	    //System.out.println("testRecordAndWriteWordScore ------- word ----------");
+	    Test tests [] = word.getTests();
+	    //dumpLog(Transformer.arrayIntoVector(tests));
+	    //System.out.println("testRecordAndWriteWordScore -------");
+	    //dumpLog(store.getLog());
+	    //System.out.println("testRecordAndWriteWordScore -------");
+	    int number_of_tests = tests.length;
+	   store.recordWordTestScore(wtr, awt, max_level, category, user_name);
+	   // file should be saved inside storage
+	   //System.out.println("testRecordAndWriteWordScore -------");
+	    //dumpLog(store.getLog());
+	    //System.out.println("testRecordAndWriteWordScore -------");
+	    Word saved_word = store.getWordObject(search_property, search_value, category, user_name);
+	    Test saved_tests [] = saved_word.getTests();
+	    //dumpLog(Transformer.arrayIntoVector(saved_tests));
+	   int expected_number_of_tests = number_of_tests + 1;
+	   int actual_number_of_tests = saved_tests.length;
+	   assertEquals(expected_number_of_tests, actual_number_of_tests);
+    }
+    /*
+	WordTestResult
+		private String text;
+		private String definition;
+		private String answer;
+		private String grade;
+		private String level;
+		private int id;
+		private String original_text;
+		private String original_definition;
+		private String original_level;
+		
+	AllWordsTest
+		// data kept on xml file
+		private String text;
+		private String definition;
+		private String category;
+		private String test_type;
+		private String level;
+		// users answers
+		private String answer;
+	*/
+	
+	public void testGetUserOptions()
+	{
+	    String user_name = new String("guest");
+	    //String file_name = new String("text-def");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Hashtable user_opts = store.getUserOptions(user_name, current_dir);
+	    //dumpLog(user_opts);
+	    int expected = 22;
+	   int actual = user_opts.size();
+	   assertEquals(expected, actual);
+	}
+	
+	public void testConstructor()
+	{
+		//System.out.println("testConstructor -------");
+		String user_name = new String("guest");
+		String file_name = new String("text-def");
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileStorage store = new FileStorage(current_dir);
+		Vector results = store.getLog();
+		//System.out.println("testConstructor -------");
+		//dumpLog(results);
+		boolean expected = true;
+		boolean actual = true;
+		assertEquals(expected, actual);
+	}
+	
+	public void testEditWord()
+	{
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    String user_name = new String("test_user");
+	    String file_name = new String("word1");
+	    Word old_word = new Word();
+	    old_word.setText("text");
+	    old_word.setDefinition("def");
+	    Word new_word = new Word();
+	    new_word.setText("textual");
+	    new_word.setDefinition("contextual");
+	    String encoding = new String("UTF-8");
+	    //String encoding = new String("eu-kr"); // why dont this work?
+	    FileStorage store = new FileStorage(current_dir);
+	    store.editWord(old_word, new_word, file_name, user_name, encoding);
+	    String text = "textual";
+	    Word actual_word = store.getWordWithoutTests(text, file_name, user_name);
+	    String actual_text = actual_word.getText();
+	    String expected_text = text;
+	    //dumpLog(store.getLog());
+	    store.editWord(new_word, old_word, file_name, user_name, encoding);
+	    assertEquals(expected_text, actual_text);
+	}
+	
+	public void testGetNewWordsList()
+	{
+		System.out.println("testGetNewWordsList -------");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    String user_id = new String("-5519451928541341468");
+	    //String encoding = new String("eu-kr"); // why dont this work?
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector new_words = store.getNewWordsList(Constants.READING, user_id, Constants.VOCAB);
+	    String actual_text = null;
+	    String expected_text = "no";
+	    System.out.println("testGetNewWordsList ------- words");
+	    dumpWords(new_words);
+	    System.out.println("testGetNewWordsList -------");
+	    System.out.println("testGetNewWordsList ------- log");
+	    dumpLog(store.getLog());
+	    System.out.println("testGetNewWordsList -------");
+	    assertEquals(expected_text, actual_text);
+	}
+	
+    public void testDeleteWord()
+    {
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    Word word = new Word();
+	    String text = new Date().toString();
+	    word.setText(text);
+	    word.setDefinition("contextual");
+	    String original = new String("word.xml");
+	    String user_name = new String("test_user");
+	    //String encoding = new String("UTF-8");
+	    String encoding = new String("euc-kr");
+	    String user = new String("test_user");
+	    String copy_cat = new String("word copy.xml");
+	    String original_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+original);
+	    File original_file = new File(original_path);
+	    String duplicate_path = new String(current_dir+File.separator+"files"+File.separator+user+File.separator+copy_cat);
+	    File duplicate_file = new File(duplicate_path);
+	    FileStorage fs = new FileStorage();
+	    fs.copyFile(original_file, duplicate_file);
+	    FileStorage store = new FileStorage(current_dir);
+	    store.copyFile(original_file, duplicate_file);
+	    System.out.println("FileStorageTest.testDeleteWord: added "+text);
+	    //dumpLog(store.getLog());
+	    store.addWord(word, copy_cat, user_name, encoding); // we are assumning that worked now
+	    store.deleteWord(word, copy_cat, user_name, encoding);
+	    Vector actual_words = store.getWordObjects(copy_cat, user_name);
+	    System.out.println("FileStorageTest.testDeleteWord: --- words ---");
+	    dumpWords(actual_words);
+	    System.out.println("FileStorageTest.testDeleteWord: --- log   ---");
+	    dumpLog(store.getLog());
+	    int actual = actual_words.size();
+	    int expected = 1;
+	    //duplicate_file.delete();
+	    assertEquals(expected, actual);
+    }
+    
+    /**
+     * Testing updateHistory.
+     */
+    public void testUpdateHistory()
+    {
+    	//System.out.println("FileStorageTest.testUpdateHistory ------------------");
+    	File path_file = new File("");
+    	String user_id = new String("-5519451928541341468");
+	    String current_dir = path_file.getAbsolutePath();
+    	Storage store = new FileStorage(current_dir);
+		Hashtable user_opts = store.getUserOptions(user_id, current_dir);
+		Vector tests = store.getTestCategories(user_id);
+		Vector words = store.getWordCategories("primary", user_id);
+		AllTestStats all_test_stats = store.getTestStats(tests, user_id);
+		long actual_session_start = new Date().getTime(); 
+		all_test_stats.setSessionStart(actual_session_start);
+		AllWordStats all_word_stats = store.getWordStats(words, user_id);
+		//System.out.println("----------------- all_test_stats ------------------");
+		//dumpLog(Transformer.createTable(all_test_stats));
+		//System.out.println("----------------- all_word_stats ------------------");
+		//dumpLog(Transformer.createTable(all_word_stats));
+		long expected_time = store.updateHistory(all_test_stats, all_word_stats, user_id);
+		//System.out.println("------------------- store.log ---------------------");
+		//dumpLog(store.getLog());
+		FileTestRecords ftr = new FileTestRecords(current_dir);
+		Momento old_m = ftr.getStatusRecord(user_id, Constants.VOCAB);
+		//System.out.println("FileStorageTest.testUpdateHistory ----- last_record");
+		Hashtable last_record = ftr.getReadingAndWritingLevels();
+		long actual_time = Long.parseLong((String)last_record.get("date"));
+		//long expected_session_start = Long.parseLong("0");
+		int actual_number_of_words = Integer.parseInt((String)last_record.get("number_of_words"));
+		int expected_number_of_words = 2185;
+	    //dumpLog(last_record);
+	    assertEquals(expected_time, actual_time);
+    }
+	
+	/* see next method for notes.
+	public void testCleanTests()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		Vector files = 
+		String user_name = new String("cleaner");
+		String file_name1 = new String("kpt1.xml");
+		String file_name2 = new String("kpt2.xml");
+		String file_name3 = new String("kpt3.xml");
+		String file_name4 = new String("kpt4.xml");
+		FileStorage store = new FileStorage(current_dir);
+		Vector w = new Vector();
+		int cleaned = 0;
+		cleaned = cleaned + store.cleanTests(w, file_name1);
+		cleaned = cleaned + store.cleanTests(w, file_name2);
+		cleaned = cleaned + store.cleanTests(w, file_name3);
+		cleaned = cleaned + store.cleanTests(w, file_name4);
+		/*
+		int size = 
+		File clean_file = new File(path_to_cleaning_file);
+		JDOMSolution jdom = new JDOMSolution(clean_file, this);
+		int tests_cleaned = jdom.cleanAllTests();
+		int words_cleaned = jdom.cleanLevels();
+		jdom.writeDocument(path_to_clean_file);
+		*
+		System.out.println("testCleanTests============ "+ cleaned);
+	}*/
+	
+	/*
+	public void testCleaner()
+	{
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		FileStorage store = new FileStorage(current_dir);
+		String user_name = new String("cleaner");
+		Vector all_word_categories = store.getWordCategories("exclusive", user_name);
+		int size = all_word_categories.size();
+		int i = 0;
+		while (i<size)
+		{
+			String file = (String)all_word_categories.get(i);
+			String path_to_cleaning_file = (current_dir+File.separator+"files"+File.separator+user_name+File.separator+file);
+			File clean_file = new File(path_to_cleaning_file);
+			JDOMSolution jdom = new JDOMSolution(clean_file);
+			int tests_cleaned = jdom.cleanAllTests();
+			int words_cleaned = jdom.cleanLevels();
+			jdom.writeDocument(path_to_cleaning_file);
+			System.out.println("cleaned ============ "+ tests_cleaned);
+			System.out.println("levels ============= "+ words_cleaned);
+			i++;
+		}
+	}*/
+	
+		
+	/* WLTDTest is the place for this
+	public void testGetWordLastTestDatesList()
+	{
+		Vector elt_vector = new Vector();
+		elt_vector.add(user_opts.get("exclude_level0_test"));
+		elt_vector.add(user_opts.get("exclude_level1_test"));
+		elt_vector.add(user_opts.get("exclude_level2_test"));
+		elt_vector.add(user_opts.get("exclude_level3_test"));
+		int daily_words_limit = 1000;
+		wltd = new WordLastTestDates();				// create new list of words to be tested
+		wltd.setExcludeLevelTimes(elt_vector);
+		wltd.setType(type);
+		wltd.setLimitOfWords(daily_words_limit);
+		String subject = "vocab";
+		String user_name = new String("test_user");
+		ArrayList key_list = store.getWordLastTestDatesList(wltd, user_name, subject);
+		
+	}*/
+	
+	/* use when needed by admin to take word files and strip off all tests.
+	does not back up tests.  This is a features that has not been implemented yet.
+	public void testCleanAndBackupTests()
+	{
+	 
+		//public int cleanTests(Vector words, String file_name)
+		File path_file = new File("");
+		String current_dir = path_file.getAbsolutePath();
+		String user_name = new String("cleaner");
+		String file_name1 = new String("kpt 1.xml");
+		String file_name2 = new String("kpt 2.xml");
+		String file_name3 = new String("kpt 3.xml");
+		String file_name4 = new String("kpt 4.xml");
+		FileStorage store = new FileStorage(current_dir);
+		Vector w = new Vector();
+		store.cleanTests(w, file_name1);
+		dumpLog(store.getLog());
+		store.cleanTests(w, file_name2);
+		store.cleanTests(w, file_name3);
+		store.cleanTests(w, file_name4);
+		/*
+		File clean_file = new File(path_to_cleaning_file);
+		JDOMSolution jdom = new JDOMSolution(clean_file, this);
+		int tests_cleaned = jdom.cleanAllTests();
+		int words_cleaned = jdom.cleanLevels();
+		jdom.writeDocument(path_to_clean_file);
+		*
+		System.out.println("testCleanTests============");
+	
+	}
+	*/
+	
+	/*
+	*This method is not even testing FileStorage,
+	* so really should be in another test file.
+	*<p>not needed anymore.
+	*
+	public void testAddIds()
+	{
+	    String user_name = ("cleaner");
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileCategories cats = new FileCategories(current_dir);
+	    Hashtable categories = cats.getSortedWordCategories(user_name);
+	    System.out.println("add ids: cats "+categories.size());
+	    Enumeration keys = categories.keys();
+	    //FileJDOMWordLists fjdomwl = new FileJDOMWordLists(current_dir);
+	    String encoding = new String("UTF-8");
+	    while(keys.hasMoreElements())
+	    {
+		    String key = (String)keys.nextElement();
+		    String cat = (String)categories.get(key);
+		    FileStorage store = new FileStorage(current_dir);
+		    Vector words = store.getWordObjects(cat, user_name);
+		    Word word = (Word)words.get(0);
+		    String def = word.getDefinition();
+		    String text = word.getText();
+		    System.out.println("before "+text+ " "+def);
+	    }
+	    
+	    keys = categories.keys();
+	    //FileJDOMWordLists fjdomwl = new FileJDOMWordLists(current_dir);
+	    while(keys.hasMoreElements())
+	    {
+		    String key = (String)keys.nextElement();
+		    String cat = (String)categories.get(key);
+		    FileStorage store = new FileStorage(current_dir);
+		    int ids = store.addIds(cat);
+		    
+		     Vector words = store.getWordObjects(cat, user_name);
+		    Word word = (Word)words.get(0);
+		    String def = word.getDefinition();
+		    String text = word.getText();
+		    System.out.println("after "+text+ " "+def);
+	    }
+	    //System.out.println("log "+fjdomwl.getLog().size());
+	}
+	*/
+	
+	/*when trying to make a method in FileTestStorage to created an entry in the tests.record file,
+	the text field was multiplying (in each record!) each time a new one was added, and I make this
+	method just so I could see what was being added, but we were getting:
+	java.io.UTFDataFormatException: Invalid byte 3 of 3-byte UTF-8 sequence.
+	public void testWeird()
+	{
+	    File path_file = new File("");
+	    String current_dir = path_file.getAbsolutePath();
+	    FileStorage store = new FileStorage(current_dir);
+	    Vector actual_words = store.getWordObjects("weird.xml", "guest");
+	    Word first_word = (Word)actual_words.get(0);
+	    String actual_definition = first_word.getDefinition();
+	    System.out.println("testWeird -------"+actual_definition);
+    }*/
+    
+    
+    private void dumpLog(Vector log)
+    {
+	    int i = 0;
+	    while (i<log.size())
+	    {
+		    System.out.println("log - "+log.get(i));
+		    i++;
+	    }
+
+    }
+    
+    private void dumpWords(Vector log)
+    {
+	    int i = 0;
+	    while (i<log.size())
+	    {
+	    	Word to_mother = (Word)log.get(i);
+		    System.out.println(to_mother.getDefinition()+" - "+to_mother.getText());
+	    	//System.out.println("word - "+log.get(i));
+	    	i++;
+	    }
+
+    }
+    
+    private void dumpLog(Hashtable log)
+    {
+	    for (Enumeration e = log.keys() ; e.hasMoreElements() ;) 
+	    {
+		    String key = (String)e.nextElement();
+		    String val = (String)log.get(key);
+		    System.out.println(key+" -		"+val);
+	    }
+    }
+
+    public static void main(String args[]) 
+    {
+        junit.textui.TestRunner.run(ScoringTest.class);
+    }
+    
+    /**
+	*This helper method just adds the .xml extension if necessary,
+	* because sometimes we get a filename in w/o it, but usually we pass
+	* in the full filename with the extension.
+	*/
+	private File addXMLExtension(String root_path, String file_name, String user_name)
+	{
+		String file_w_o_ext = Domartin.getFileWithoutExtension(file_name);
+		if (file_w_o_ext.equals("-1"))
+			{file_w_o_ext = file_name;}
+		String path_to_words = new String(root_path+File.separator
+			+"files"+File.separator+user_name+File.separator+file_w_o_ext+".xml");
+		File file = new File(path_to_words);
+		return file;
+	}
+
+}
+

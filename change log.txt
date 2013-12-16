@@ -1,0 +1,216 @@
+Catechis 1.3  'Sebastien' 2013
+==============================
+* finished category management and other additions.
+
+Catechis 1.2  'Antonine' 2012
+=============================
+* Added Category objects that can be managed by id, with exclusive an non-exclusive categories (not used in the web app yet)
+* Sorted the WeeklyReports.
+
+Catechis 1.1  "Moudon" 2011
+===========================
+* exclude characters fix
+* add the users checked to the class.
+* add new folder to in FUT to hold the weekly reports.  File name will be year-month-week: like 2011-10
+* check for a week passed at login, and save a weekly session report, including putting the methods in ftr.
+* save the current status, as well as words at which level in a daily status record
+* figure out the average time a user takes on in each session/words tested.
+This is just a partial list of from done items on our to do list.  Other items from indoct are not included here.
+We started using status.record to hold a snapshot of activities, and the word stats are now updated after each test and the values are always up to date.
+There is still some differences when the recalculate method is called, but that's something to fix in 1.2.
+There is more, but who's going to read this anyway?  What we really need to do is keep a solid to do list, and keep track of done items better to be added to the change log after update.
+
+
+
+Catechis 1.0  "Dutoit" 2010
+===========================
+done 1 * create a class (Feb 21)
+done 2 * create new students from a list of names
+done 3 * import a list of words into each student in the class (2011-03-06)
+done 4 * prepare saved tests for each student (2011-04-03)
+done 4.5 save a ref to the class with student_ids/test_ids list, 
+done 4.6 add a view action/page like the result page that gets the test status from each students saved test file.
+done 5 * view a list of all the pending saved tests (so that the teacher can print out each one)
+done 6 * score the tests on the list. (Jun.6)
+done 7 * backup the farm
+done 8 * show percentile score of tests
+done 9 * put percentile score as a class tests status page, or just add to the table of class home to show results.
+prob 10* The link from the saved test page back to class home doesn't work because we haven';t visited the class home yet.
+done 11* start a new work log
+done 12* move from indoct & catechis 1.0 to 1.1. (June 19th)
+Old to do list:
+done - finish format and add format vars to options
+done - save missed tests
+done - add word ids to old words
+done - fix change test not reversing score in word file.
+done - allow cancel test to return score to previous level (but still record action)
+done - added ids to new users
+done - uses have a separate options folder that relates to a jsp and provides options for just that page.  As yet there is no way to create a global set of jsp properties, like a jsp register that has properties that are used among a series of pages.
+done - retire words with x # of passe3d level 3 tests
+done - created teacher/class roles.
+- change user.logins user_name to user_ids.
+- add option for removing a word from the missed list after a certain time.
+- end of daily test message (when WLTD reaches mark since login?)
+- record changed tests and let teachers view list
+- add list filter for options such as include level 1, 2, etc for weekly list.
+- allow levels to be set on word input for previously known words.
+- edit options, password, etc
+- switch test type fix error
+- allow users to edit options, bases of permit/not permit admin settings
+- error page
+- weekly list format options ie: page breaks, flash cards, etc
+- put text field limit in options
+- help file/tutorial
+- new user experience
+- make re-fresh tests impossible
+- notification when missed words are full(?) better way?
+- non-exclusive categories with word indexs for test order, study, etc
+- admin/users clean tests from words utility
+- switching daily tests doesn't work
+- percentage not working
+- get locales and encodings from the users options file
+- allow the range of words tested to be used, and make changes in the word grading function
+- allow user to change password
+- put ad footer and logo includes on every page
+- admin ability to add new properties to options of all users
+- record tests changed updates
+- s&l tests after words reach level 3(?) r&w
+- separate subjects (ie: vocab, grammar, hanja, etc...)
+- retire tests to backup file
+- clean tests
+- combine r&w daily tests.
+- refactor FileAction to be threadsafe, etc...
+- put new words at top of list
+- waiting list schedule for intro of new words
+- The second time a word is tested at a level (higher than 0), in case of a failed test, the word
+ goes back to the same level as a default.
+- test status (like after clicking retire word, word retired msg comes up)
+- option so that if a word at level 3 is failed, it goes back to level 0.
+could also have another option that if a word that was previously at level 3 is tested again
+it then goes back up to level 3 from level 0...
+- last five words tested list about next test...
+errors
+* missed words hang
+* daily test of confess error:
+
+** errors
+* error: /jsps/stats/word_stats.jsp(44,24) quote symbol expected
+done - specific tests give this error: java.lang.NullPointerException
+	at org.apache.jsp.test_jsp._jspService(test_jsp.java:143)
+2007-10-13 18:01:12 StandardContext[/indoct]DailyTestResultAction.perform for guest
+2007-10-13 18:01:12 StandardWrapperValve[action]: Servlet.service() for servlet action threw exception
+java.lang.NumberFormatException: null
+	at java.lang.Integer.parseInt(Integer.java:436)
+	at java.lang.Integer.parseInt(Integer.java:518)
+	at org.catechis.JDOMSolution.findWordFromDefinition(JDOMSolution.java:1030)
+	at org.catechis.FileStorage.getWordObject(FileStorage.java:285)
+	at org.catechis.FileStorage.scoreSingleWordTest(FileStorage.java:813)
+	
+Catechis 0.9 - 2009
+===================
+- Created utilities to retire words so that they will be excluded from the daily tests in FileJDOMWordLists.
+- Retired words are also excluded from the DailyTestAction in WordLastTestDates.
+- Created a utility to ad ids to any words that don't have them.
+- Created FormatPanel to judge pixel length of strings so that we can create
+lists of rows that will be printed in a table cell to aid in formatting lists
+as a single page format, flash cards, etc.
+- WordLastTestDates now allows setting a mark of i, j used in getList to save the
+ daily_test_index in format i:j in the vocab/test.records file and using the mark later
+  so that after the daliy_test_limit in user.options file is reached, we continue
+  where we were last time, looking at words to test/exclude from testing. (Jan 13th, 08)
+- New User creation routines are in FileUserUtilities in the admin package.
+In admin.FileUserUtilities, the createNewUser method creates all the files and folders needed,
+as well as the entry in the user.passes file.
+- Also in FileUserUtilities is a method checkInvitationCode to see if the user knows the
+contents of the <invitation_code> tag in the user.passes file to authenticate the
+creation of a new user profile.
+- Finally made a primary key id generator in Domartin, so users now have an id.
+	
+Catechis 0.8 - January 1st 2008
+===============================
+- Fixed edit word and put it in its very own object FileEdit!
+- Created import methods to import a list of words at one time.
+- Created WordListFilter to remove repeats from the weekly list.
+- Created an admin package for a view of users and their options, such as viewing
+  user options, putting a log entry in a file upon user log in, and monitoring
+  services for an admin.
+- erase missed words list.
+- correct undo to level up
+- remove repeats from weekly list (put this in user opts)
+- ignore [pron.] hints...
+- separate recalculate link
+- gotta keep deleting missed words until they are under the limit
+- edit word
+- delete words
+- grand test index/ don't rollover tests index no.
+- return to simple categories link on word list page
+- get locale from options
+
+Catechis 0.7 - October 10th 2007
+================================
+
+- created an add category method in FileCategories.
+- Fixed edit and delete word methods in FileStorage.
+- Added methods to get filtered results from the tests.records file, as well
+ad alter them for the undo method in ChangeUpdateAction. (9/30/07)
+- Created FileTestRecords to store and retrieve daily test records.  This will also retrieve
+the last history file in the user_name.hist file. (9/02/07)
+- Created Categories interface to retrieve an ordered list of categories by earliest date.
+Instead of overcrowding the Storage interface, similar methods are found in Categories.
+A new folder was made for interfaces, and a separate folder for file-specific objects.
+This was done to limit the number of java files crowding the main catechis package. (7/30/07)
+
+Catechis 0.6 - Finished June 28th 2007
+=====================================
+
+- New Scoring utility that allows threadsafe access to take an AllWordsTest object 
+and return a WordTestResult object. Finally finished June 28th although it was mostly 
+complete months before this, but not debugged.
+
+- Exclude words based on a last test date vector. May 2007.
+
+- created a legacy package to use CreateJDOMList for test scoring and to get words
+with recently tested words excluded. May 2007.
+
+- added a date utility to get a fomatted date from a long ket in Transformer Dec. 6th 2006
+
+- worked on WordLastTestDates to provide a list of words sorted by their last date tested. Dec.6th 2006
+
+Catechis 0.5 - Finished April 15th, 2006
+========================================
+
+- Created Rate Of Forgetting utilities to calculate the period of time between when a user passes a test on a word,
+and then fails a test a the next higher level.  This is to help create a schedule of words to be tested 
+and reminders for when a word is being forgotten.
+
+- Created WordTestDates to hold the list of words last test dates.  There are two separate lists for reading and writing,
+and a separate ArrayList of milliseconds is kept so that the lists can be sorted by date.
+
+- Fixed word level change error where a level 1 or higher test level could not be reversed correctly.
+
+- Possible OutOfMemory error with the StatsTest.testAllWords method.
+
+
+Catechis 0.4 - Finished Novemeber 2005
+======================================
+
+- Added update methods for changing a words text and definition as well as updating the test score to be used after a word test is run, and the user wants to reverse the result, on a word by word basis, becasue there is a typo in the original or answer, or as in a reading test, there is a one to many relationship in the words meaning.
+- Added filter object and filtering mechanism based on it to do such things as exclude words based on an exclude time to filter out recently tested words.  As well as the old word level filters
+
+Catechis 0.3 - Finished October 2005
+====================================
+
+- Created History of all statistics
+
+Catechis 0.2 - Finished October 12th, 2005
+==========================================
+
+- Added statistical funvtionality and Word, Test, and Filter objects,
+as well as AllWord, AllTest objects and statistics for overall performance.
+
+Catechis 0.1 - December 2004
+============================
+- The basic beginning jar, begun around December 2004 to provide a detachable library
+for natural language study utilities apart from where they were used, ie: 
+a desktop app, webb app with struts, or any other architecture.
+- Started using JUnit to test most methods.

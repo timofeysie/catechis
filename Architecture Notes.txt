@@ -1,0 +1,72 @@
+Application Resource Properties are in indoct/WEBINF/classes
+
+The Storage object should only need to know the users id (previously name), and get everything else from that.
+In this way, the users session will not be clogged up with potentially unused objects.
+Instead, the FileStorage implementation can find the users directory, load any files its needs, and dispatch the data to other objects.
+For instance, to score a word, the word test object is passed through to the FileStorage, which finds the original and dispatches the data to the Scorer object,
+It also load the users options so that exclude characters can be used when determining a correct answer.
+
+One exception to this architecture is the WordLists interface which is implemented in the FileJDOMWordLists class.  
+It only contains methods like addToNewWordsList, getNewWordsList, removeWordFromNewWordsList.
+If implemented by a future class such as HibernateNewWordsList, the methods would be database calls.
+However, if there is filtering, or other complex methods, they should be in a middle tire method that isolates these more complex methods, that then call JDOM/Hibernate methods.
+So thinking about it now, the web app, or the middle tier objects shouldn't know if it is going to call a xml file, or a database.
+In this case, the interface should be fore the third tier only, and we need a way to choose between the two.
+This could be a good place to use the Strategy pattern.
+
+There are various utilities in FilesStorage test which clean tests of files so they can be used by another user,
+or add ids to old words, before ids were added upon word creation.
+
+Admin features like getting user logins, as well as adding a new user and their options files is done in the admin package in FileUserUtilities which then uses JDOMFiles for JDOM and file related activities.
+
+directory system:
+files
+	admin
+		admin.options
+		users
+			<user_id>.usr
+	<user_id>
+		daily <type>tests.record
+		level <0-3> <type>.test
+		<user_name>.hist
+		<user_name>.options
+		<word file>.xml
+		...
+		vocab
+			status.record
+			lists
+				new words <type>.list
+				retired words.list
+				wltd
+					<date_in_milliseconds>.xml
+					...
+				wntd
+					<date_in_milliseconds>.xml
+					...
+			options
+				jsp_options
+					<jsp_pages_name>.options
+					...
+			tests
+				saved tests.xml
+				saved
+					<id>.xml
+					...
+			history
+				year-month-week.xml * summary of weekly session info
+					
+A file outside a folder can have meta information about files inside directories.
+For example, saved tests.xml has a list of saved test ids and their related info.
+This saves opening every file in the folder just to get meta info.
+Care must be taken to keep the meta file and folder contents coordinated.
+
+the org.catechis.interface package has back end storage functional classes that 
+ can be implemented as File or MySql or Hibern8, etc objects that provide concrete
+ storage media type specific methods.  These methods should me in a separate package,
+ such as org.catechis.file which holds xml specific routines.
+Utility functions that can be shared by these objects should be in a separate package.
+
+The status.record file
+----------------------
+
+

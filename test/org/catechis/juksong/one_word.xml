@@ -1,0 +1,30 @@
+<vocab>
+	<word>
+	<text>정리</text>
+	<definition>arrangement</definition>
+	<writing-level>2</writing-level>
+	<reading-level>1</reading-level>
+	<test><date>Thu Oct 27 16:30:04 KST 2005</date><file>level 0 reading.test</file><grade>pass</grade></test>
+	<test><date>Mon Oct 31 20:30:07 KST 2005</date><file>level 0 writing.test</file><grade>fail</grade></test>
+	<test><date>Tue Dec 27 23:47:53 KST 2005</date><file>level 0 writing.test</file><grade>pass</grade></test>
+	<test><date>Mon Apr 24 19:15:26 KST 2006</date><file>level 1 reading.test</file><grade>pass</grade></test>
+	<test><date>Mon Jul 24 12:47:33 KST 2006</date><file>level 1 writing.test</file><grade>fail</grade></test>
+	<test><date>Thu Oct 19 22:53:28 KST 2006</date><file>level 2 reading.test</file><grade>fail</grade></test>
+	<test><date>Thu Jan 04 09:56:04 KST 2007</date><file>level 0 writing.test</file><grade>fail</grade></test>
+	<test><date>Thu Jan 18 16:21:38 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>
+	<test><date>Wed Sep 05 21:45:13 KST 2007</date><file>level 1 writing.test</file><grade>fail</grade></test>
+	<test><date>Fri Sep 21 17:34:23 KST 2007</date><file>level 0 writing.test</file><grade>fail</grade></test>
+	<test><date>Sun Sep 30 13:48:09 KST 2007</date><file>level 0 writing.test</file><grade>fail</grade></test>
+	<test><date>Tue Oct 02 00:17:03 KST 2007</date><file>level 0 writing.test</file><grade>pass</grade></test>
+	<test><date>Tue Oct 16 18:14:37 KST 2007</date><file>level 3 reading.test</file><grade>pass</grade></test>
+	<test><date>Fri Oct 26 20:34:26 KST 2007</date><file>level 1 writing.test</file><grade>pass</grade></test>
+	<test><date>Fri Dec 28 01:00:29 KST 2007</date><file>level 2 writing.test</file><grade>pass</grade></test>
+	<test><date>Mon Mar 03 11:19:20 KST 2008</date><file>level 3 reading.test</file><grade>pass</grade></test>
+	<test><date>Mon Jul 21 11:07:38 KST 2008</date><file>level 3 writing.test</file><grade>pass</grade></test>
+	<id>-3457751923227770362</id>
+	<test><date>Fri Nov 27 10:39:14 KST 2009</date><file>level 0 reading.test</file><grade>fail</grade></test>
+	<test><date>Mon Dec 14 10:39:14 KST 2009</date><file>level 3 writing.test</file><grade>fail</grade></test>
+	<test><date>Fri Feb 12 09:47:19 KST 2010</date><file>level 2 reading.test</file><grade>fail</grade></test>
+	</word>
+
+	</vocab>

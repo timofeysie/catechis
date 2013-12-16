@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+<struts-config>
+  <!-- ========== Form Bean Definitions =================================== -->
+  <form-beans>
+    	<form-bean      name="submitForm"
+                    	type="myproject.SubmitForm"/>
+	<form-bean      name="loginForm"
+                    	type="com.businessglue.struts.LoginForm"/>
+	<form-bean      name="testForm"
+                    	type="com.businessglue.struts.TestForm"/>
+	<form-bean      name="FilterListForm"
+                    	type="com.businessglue.struts.FilterListForm"/>
+	<form-bean      name="FilterFileForm"
+                    	type="com.businessglue.struts.FilterFileForm"/>
+	<form-bean	name="FilterTestRunForm"
+			type="com.businessglue.struts.FilterTestRunForm"/>
+	<form-bean      name="addWordForm"
+                    	type="com.businessglue.struts.AddWordForm"/>
+			
+	<form-bean      name="allWordsTestForm"
+                    	type="com.businessglue.struts.AllWordTestForm"/>
+			
+	<form-bean      name="dailyTestForm"
+                    	type="com.businessglue.struts.DailyTestForm"/>
+			
+	<!-- From Validator Example: Registration form bean -->
+	<form-bean 	name="registrationForm" 
+			type="org.apache.struts.webapp.validator.RegistrationForm" />
+  </form-beans>
+  <!-- ========== Action Mapping Definitions ============================== -->
+  <action-mappings>
+    <action    path="/submit"
+               type="myproject.SubmitAction"
+               name="submitForm"
+              scope="request"
+              input="/submit.jsp">
+    <forward name="success" path="/submit.jsp"/>
+    </action>
+    <action    path="/login"
+               type="com.businessglue.struts.LoginAction"
+               name="loginForm"
+              scope="request"
+              input="/login.jsp">
+    <forward name="success" path="/welcome.jsp"/>
+    <forward name="failure" path="/error.jsp"/>
+    </action>
+    
+    <action    path="/file"
+               type="com.businessglue.struts.FileAction"
+	       name="file"
+	       scope="request"
+	       input="file.jsp">
+    <forward name="open" path="/file.jsp"/>
+    <forward name="parse_text" path="/parse_text.jsp"/>
+    <forward name="options" path="/options.jsp"/>
+    <forward name="test" path="/test.jsp"/>
+    <forward name="text" path="/text.jsp"/>
+    </action>
+    
+    <action    path="/list"
+               type="com.businessglue.struts.ListAction"
+	       name="list"
+	       scope="request"
+	       input="/list.jsp">
+    <forward name="list" path="/list.jsp"/>
+    </action>
+    
+    <action    path="/add_word"
+               type="com.businessglue.struts.AddWordAction"
+	       name="addWordForm"
+	       scope="request"
+	       input="/add_word.jsp">
+    <forward name="add_word" path="/add_word.jsp"/>
+    </action>
+    
+    <action    path="/edit_word"
+               type="com.businessglue.struts.EditWordAction"
+	       name="addWordForm"
+	       scope="request"
+	       input="/edit_word.jsp">
+    <forward name="edit_word" path="/edit_word.jsp"/>
+    </action>
+    
+    <action    path="/delete_word"
+               type="com.businessglue.struts.DeleteWordAction"
+	       scope="request"
+	       input="/delete_word.jsp">
+    <forward name="add_word" path="/delete_word.jsp"/>
+    </action>
+    
+    <action    path="/change_test"
+               type="com.businessglue.struts.ChangeTestAction"
+	       name="change_test"
+	       scope="request"
+	       input="change_test.jsp">
+    <forward name="change_test" path="/change_test.jsp"/>
+    </action>
+    
+    <action    path="/change_update"
+               type="com.businessglue.struts.ChangeUpdateAction"
+	       name="change_update"
+	       scope="request"
+	       input="change_update.jsp">
+    <forward name="change_update" path="/change_test.jsp"/>
+    <forward name="test_result_writing" path="/test_result_writing.jsp"/>
+    <forward name="test_result_reading" path="/test_result_reading.jsp"/>
+    </action>
+    
+    <action    path="/filter_list"
+               type="com.businessglue.struts.FilterListAction"
+	       name="FilterListForm"
+	       scope="request"
+	       input="filter_list.jsp">
+    <forward name="filter_list" path="/filter_list.jsp"/>
+    </action>
+    
+    <action    path="/history"
+               type="com.businessglue.struts.HistoryAction"
+	       input="history.jsp">
+    <forward name="open" path="/history.jsp"/>
+    </action>
+    
+    
+    <action    path="/filter_test"
+               type="com.businessglue.struts.FilterTestAction"
+	       input="filter_test.jsp">
+    <forward name="filter_test" path="/filter_test.jsp"/>
+    </action>
+    
+    <action    path="/filter_test_run"
+               type="com.businessglue.struts.FilterTestRunAction"
+	       name="FilterTestRunForm"
+	       scope="request"
+	       input="filter_test.jsp">
+    <forward name="filter_test_run" path="/filter_test_run.jsp"/>
+    </action>
+    
+    <action    path="/all_words_list"
+               type="com.businessglue.struts.AllWordsListAction"
+	       scope="request">
+    <forward name="all_words_list" path="/all_words_list.jsp"/>
+    </action>
+    
+    <action    path="/system"
+               type="com.businessglue.struts.SystemAction"
+	       name="system"
+	       scope="request"
+	       input="system.jsp">
+    <forward name="system" path="/system.jsp"/>
+    </action>
+    
+    <action    path="/choose_test_file"
+               type="com.businessglue.struts.ChooseTestFileAction"
+	       name="choose_test_file"
+	       scope="request"
+	       input="choose_test_file.jsp">
+    <forward name="choose_test_file" path="/choose_test_file.jsp"/>
+    </action>
+    
+    <action    path="/run_test"
+               type="com.businessglue.struts.TestAction"
+	       name="run_test"
+	       scope="request"
+	       input="run_test.jsp">
+    <forward name="run_test" path="/run_test.jsp"/>
+    <forward name="run_reading_test" path="/run_reading_test.jsp"/>
+    <forward name="run_writing_test" path="/run_writing_test.jsp"/>
+    </action>
+    
+    <action    path="/test_result"
+               type="com.businessglue.struts.TestResultAction"
+	       name="testForm"
+	       scope="request"
+	       input="run_test.jsp">
+    <forward name="test_result" path="/test_result.jsp"/>
+    <forward name="test_result_writing" path="/test_result_writing.jsp"/>
+    <forward name="test_result_reading" path="/test_result_reading.jsp"/>
+    </action>
+    
+    <action    path="/filter_file"
+               type="com.businessglue.struts.FilterFileAction"
+	       name="FilterFileForm"
+	       scope="request"
+	       input="filter_file.jsp">
+    <forward name="filter_file" path="/filter_file.jsp"/>
+    </action>
+    
+    <action    path="/stats"
+               type="com.businessglue.struts.StatsAction"
+               name="stats"
+              scope="request"
+              input="stats.jsp">
+    <forward name="stats" path="/stats.jsp"/>
+    </action>
+    
+    <action    path="/stats_word"
+               type="com.businessglue.struts.StatsWordAction"
+               name="stats_word"
+              scope="request"
+              input="stats_word.jsp">
+    <forward name="stats_word" path="/stats_word.jsp"/>
+    </action>
+    
+    <action    path="/daily_test"
+               type="com.businessglue.struts.DailyTestAction"
+	       name="dailyTestForm"
+	       scope="request"
+	       input="daily_test.jsp">
+	       <forward name="daily_test_results" path="/daily_test_result.jsp"/>
+    </action>
+    
+    <action    path="/daily_test_result"
+               type="com.businessglue.struts.DailyTestResultAction"
+	       name="dailyTestForm"
+	       scope="request"
+	       input="daily_test_result.jsp">
+	       <forward name="daily_test" path="/daily_test.jsp"/>
+    </action>
+    
+    <!-- From Validator Ex: Registration Action -->
+    <action path="/registration" forward="/registration.jsp" />
+    <action path="/registration-submit" type="org.apache.struts.webapp.validator.RegistrationAction" name="registrationForm" scope="request" validate="true" input="input">
+      <forward name="input" path="/registration.do" />
+      <forward name="success" path="file.jsp" />
+    </action>
+    <action path="/jsRegistration" forward="/jsRegistration.jsp" />
+    
+  </action-mappings>
+  
+  <!--message-resources parameter="ApplicationResources"/-->
+  
+    <message-resources
+    	parameter="ApplicationResources"/>
+  
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames"
+                     value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>

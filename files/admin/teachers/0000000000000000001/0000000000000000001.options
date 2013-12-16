@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classes>
+	<option>
+		<name>encoding</name>
+		<value>euc-kr</value>
+	</option>
+	<option>
+		<name>teacher_name</name>
+		<value>Tim</value>
+	</option>
+</classes>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="euc-kr"?>
+<vocab>
+	
+	
+	<word>
+		<text>garbled</text>
+		<definition>def2</definition>
+		<level>1</level>
+		<writing-level>0</writing-level>
+		<reading-level>0</reading-level>
+		<test>
+			<date>Sun Jan 30 13:43:01 PST 2005</date>
+			<file>level 0 reading.test</file>
+			<grade>pass</grade>
+		</test>
+		<test><date>Mon Apr 11 09:33:15 PDT 2005</date><file>level 1 reading.test</file><grade>pass</grade></test>
+		<test><date>Thu May 05 15:43:13 PDT 2005</date><file>level 2 reading.test</file><grade>pass</grade></test>
+		<test><date>Mon Jun 27 16:19:48 PDT 2005</date><file>level 5 writing.test</file><grade>pass</grade></test>
+	<id>5882280617916499656</id><test><date>1281845308818</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1281845546470</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282466131752</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282556199662</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282556601379</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282558108311</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282558271230</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282559480682</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282559639083</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282560334168</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282656656081</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282956802928</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1282962794279</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1283048737730</date><file>level 0 writing.test</file><grade>fail</grade></test><test><date>1283048800726</date><file>level 0 writing.test</file><grade>fail</grade></test></word>
+	
+</vocab>
