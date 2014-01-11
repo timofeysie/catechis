@@ -18,4 +18,4 @@ The jar will be created in the dist directory specified in the build file.
 
 <property name="dist.dir" location="dist"/>
 
-If the folder doesn't exists, it will be created in the directory containing the project.
+If the folder doesn't exists, it will be created in the project directory with the default setting.
