@@ -16,6 +16,8 @@ To create the jar, run the dist ant target like this:
 
 The jar will be created in the dist directory specified in the build file.
 
-<code><property name="dist.dir" location="dist"/><code>
+<code>'''
+<property name="dist.dir" location="dist"/>
+<code>
 
 If the folder doesn't exists, it will be created in the project directory with the default setting.
