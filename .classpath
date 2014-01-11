@@ -12,5 +12,7 @@
 	<classpathentry kind="lib" path="lib/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/xerces.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="/home/timothy/java/catechis/lib/struts.jar"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
