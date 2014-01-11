@@ -1,7 +1,4 @@
 <?xml version="1.0"?>
-<!DOCTYPE project [
-    <!ENTITY properties SYSTEM "../properties.xml">
-]>
 
 <project name="Catchis"
          default="test-batch" basedir=".">
@@ -16,7 +13,6 @@
 	<property name="jarfile.path" location="${dist.dir}/${jarfile.name}"/>
 
   <property name="junit.fork" value="true"/>
-  &properties;
 
   <path id="compile.classpath">
     <pathelement location="${lucene.jar}"/>
@@ -30,8 +26,7 @@
     <pathelement path ="lib/jdom.jar"/>
     <pathelement path ="lib/xerces.jar"/>
     <pathelement path ="lib/beanviews.jar"/>
-    <pathelement path ="/home/${user.name}/projects/indoct/WEB-INF/lib/struts.jar"/>
-    <pathelement path ="/home/${user.name}/projects/indoct/WEB-INF/src/com/businessglue/util/CreateJDOMList.java"/>
+    <pathelement path ="lib/struts.jar"/>
   </path>
 
   <path id="test.classpath">
