@@ -81,7 +81,7 @@ public class WordNextTestDates
 		// do we need to sort these? test it!
 		String first_reading_file = Domartin.getFileWithoutExtension(reading_file_names [0]);
 		String first_writing_file = Domartin.getFileWithoutExtension(writing_file_names [0]);
-		//log.add("1st reading file "+first_reading_file+" 1st writing file "+first_writing_file);
+		log.add("1st reading file "+first_reading_file+" 1st writing file "+first_writing_file);
 		String and_the_winner_is = WordTestDateUtility.getEarlierTime(first_reading_file, first_writing_file);
 		log.add("remote date "+and_the_winner_is);
 		next_test_type = Constants.READING; 
