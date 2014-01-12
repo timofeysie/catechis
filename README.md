@@ -12,10 +12,12 @@ Catechis also requires Junit to be on your classpath when you run the build.xml 
 
 To create the jar, run the dist ant target like this:
 
-bash$ ant dist
+<code>bash$ ant dist</code>
 
 The jar will be created in the dist directory specified in the build file.
 
+```xml
 <property name="dist.dir" location="dist"/>
+```
 
 If the folder doesn't exists, it will be created in the project directory with the default setting.
