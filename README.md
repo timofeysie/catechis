@@ -1,7 +1,9 @@
 catechis
 ========
 
-Natural language learning with spaced repetition.
+  Natural language learning with spaced repetition.  
+  
+  The jar is used in the Indoct Struts web application for learning foreign langugaes using a spaced repetition algorithm.  This package was created with Java 1.4.2.  Therefore, mostly there are no generics or other features introduced after this release.
 
 ### Installation Instructions ###
 
